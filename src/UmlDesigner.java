@@ -1,6 +1,7 @@
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class UmlDesigner extends JPanel implements MouseListener {
@@ -9,10 +10,11 @@ public class UmlDesigner extends JPanel implements MouseListener {
 		this.addMouseListener(this);
 	}
 	
-	private void storeClassInfo(int x, int y) {
+	private void storeClassInfo(int x, int y, String name) {
 		ClassInfo classInfo = new ClassInfo();
 		classInfo.setX(x);
 		classInfo.setY(y);
+		classInfo.setName(name);
 		ClassData.getInstance().addClass(classInfo);
 	}
 
@@ -20,9 +22,13 @@ public class UmlDesigner extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
-		this.storeClassInfo(x, y);
+		String name=JOptionPane.showInputDialog(this, "Enter Name");
+		if(name == null || name.equals("")) {
+			return;
+		}
 		Rectangle rect = new Rectangle(this);
-		rect.draw(x, y);
+		rect.draw(x, y, name);
+		this.storeClassInfo(x, y, name);
 	}
 
 	@Override

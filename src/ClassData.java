@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public class ClassData {
+public class ClassData extends Observable {
 	private static ClassData classData;
 	private List<ClassInfo> classInfo;
 	
@@ -18,6 +19,12 @@ public class ClassData {
 	
 	public void addClass(ClassInfo classInfo) {
 		this.classInfo.add(classInfo);
+		setChanged();
+		notifyObservers();
+	}
+	
+	public List<ClassInfo> getClassList() {
+		return classInfo;
 	}
 
 }

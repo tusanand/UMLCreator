@@ -25,5 +25,7 @@ public class InitializeFrame extends ButtonActions {
 	    umlDesigner.setBackground(Color.white);
 	    umlDesigner.setBorder(BorderFactory.createLineBorder(Color.black));
 	    this.getContentPane().add(umlDesigner);
+	    
+	    ClassData.getInstance().addObserver(umlDescriptor);
 	}
 }

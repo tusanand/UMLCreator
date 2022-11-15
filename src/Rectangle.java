@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -11,8 +12,9 @@ public class Rectangle implements DrawInterface {
 	}
 	
 	@Override
-	public void draw(int x, int y) {
+	public void draw(int x, int y, String name) {
 		g.drawRect(x-35, y-25, 70, 50);
+		g.drawString(name, x-25, y);
 	}
 
 }
