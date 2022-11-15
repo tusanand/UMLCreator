@@ -11,10 +11,10 @@ public class InitializeFrame extends ButtonActions {
 	}
 	
 	private void initialize() {
-		this.setTitle("Random Number Graph Generator");
+		this.setTitle("UML DESIGNER");
 	    this.setBounds(10, 10, 500,500);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    this.getContentPane().setLayout(new GridLayout(0, 2));
+	    this.getContentPane().setLayout(new GridLayout(1, 2));
 	    
 	    UmlDescriptor umlDescriptor = new UmlDescriptor();
 	    umlDescriptor.setBackground(Color.white);
