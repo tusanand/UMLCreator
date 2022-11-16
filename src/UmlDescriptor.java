@@ -33,6 +33,7 @@ public class UmlDescriptor extends JPanel implements Observer {
 		this.add(label);
 		this.revalidate();
 		this.repaint();
+		StatusLogger.getInstance().showMessage("Class Added");
 	}
 
 }
