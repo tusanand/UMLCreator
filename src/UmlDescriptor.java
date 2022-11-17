@@ -11,7 +11,7 @@ public class UmlDescriptor extends JPanel implements Observer {
 	ConnectionDecisionHandlerInterface inheritanceHandler;
 	ConnectionDecisionHandlerInterface compositionHandler;
 	
-	public UmlDescriptor() {
+	UmlDescriptor() {
 		associationHandler = new AssociationHandler();
 		inheritanceHandler = new InheritanceHandler();
 		compositionHandler = new CompositionHandler();
