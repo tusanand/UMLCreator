@@ -20,6 +20,11 @@ public class Connection {
 		inheritanceHandler.setSuccessor(compositionHandler);
 	}
 	
+	private String getGlobalConnectionType() {
+		//TODO: change this to set from globally using radio button
+		return "ASSOCIATION";
+	}
+	
 	public boolean checkIfExist(int x, int y) {
 		List<ClassInfo> classInfoList = ClassData.getInstance().getClassList();
 		for (ClassInfo classInfo : classInfoList) {
@@ -34,7 +39,7 @@ public class Connection {
 							selectedClasses.get(0).getY(), 
 							selectedClasses.get(1).getX(), 
 							selectedClasses.get(1).getY(), 
-							"ASSOCIATION", 
+							getGlobalConnectionType(), 
 							selectedClasses.get(0), 
 							selectedClasses.get(1),
 							panel);

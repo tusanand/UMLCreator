@@ -4,6 +4,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class UmlDesigner extends JPanel implements MouseListener {
 	Connection connection;
 	
