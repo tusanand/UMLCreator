@@ -5,9 +5,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class UmlDesigner extends JPanel implements MouseListener {
+	Connection connection;
 	
 	public UmlDesigner() {
 		this.addMouseListener(this);
+		connection = new Connection(this);
 	}
 	
 	private void storeClassInfo(int x, int y, String name) {
@@ -22,6 +24,10 @@ public class UmlDesigner extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
+		if(connection.checkIfExist(x, y)) {
+			return;
+		}
+		connection.clearSelection();
 		String name=JOptionPane.showInputDialog(this, "Enter Name");
 		if(name == null || name.equals("")) {
 			return;

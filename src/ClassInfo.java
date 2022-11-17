@@ -5,7 +5,7 @@ public class ClassInfo {
 	private int x;
 	private int y;
 	private String name;
-	private Map<ClassInfo, String> connections = new HashMap<ClassInfo, String>();
+	private Map<ClassInfo, String> connectionsList = new HashMap<ClassInfo, String>();
 	
 	public int getX() {
 		return x;
@@ -26,9 +26,9 @@ public class ClassInfo {
 		this.name = name;
 	}
 	public Map<ClassInfo, String> getConnections() {
-		return connections;
+		return connectionsList;
 	}
 	public void setConnections(ClassInfo classInfo, String type) {
-		this.connections.put(classInfo, type);
+		this.connectionsList.put(classInfo, type);
 	}
 }

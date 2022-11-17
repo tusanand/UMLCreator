@@ -5,6 +5,7 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+@SuppressWarnings({ "serial", "deprecation" })
 public class UmlDescriptor extends JPanel implements Observer {
 
 	@Override

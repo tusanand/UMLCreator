@@ -9,3 +9,11 @@
 /UmlDescriptor.class
 /UmlDesigner.class
 /StatusLogger.class
+/Connection.class
+/DrawRectangleInterface.class
+/ConnectClassInterface.class
+/DrawLine.class
+/LineDecorator.class
+/DrawAssociation.class
+/DrawComposition.class
+/DrawInheritance.class

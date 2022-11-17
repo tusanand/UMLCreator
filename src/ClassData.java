@@ -2,12 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+@SuppressWarnings("deprecation")
 public class ClassData extends Observable {
 	private static ClassData classData;
-	private List<ClassInfo> classInfo;
+	private List<ClassInfo> classInfoList;
 	
 	private ClassData() {
-		classInfo = new ArrayList<ClassInfo>();
+		classInfoList = new ArrayList<ClassInfo>();
 	}
 	
 	public static ClassData getInstance() {
@@ -18,13 +19,17 @@ public class ClassData extends Observable {
 	}
 	
 	public void addClass(ClassInfo classInfo) {
-		this.classInfo.add(classInfo);
+		this.classInfoList.add(classInfo);
 		setChanged();
 		notifyObservers();
 	}
 	
 	public List<ClassInfo> getClassList() {
-		return classInfo;
+		return classInfoList;
+	}
+	
+	public void addConnectionType(ClassInfo classInfo, String connectionType) {
+		classInfoList.get(classInfoList.indexOf(classInfo)).setConnections(classInfo, connectionType);
 	}
 
 }
