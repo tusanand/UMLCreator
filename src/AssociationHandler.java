@@ -1,4 +1,4 @@
-import java.util.Map;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -26,20 +26,14 @@ public class AssociationHandler implements ConnectionDecisionHandlerInterface {
 	}
 	
 	@Override
-	public String handleRequest(ClassInfo classInfo, String message) {
-		message += "	method() { <br/>";
-		message += "		";
-		Map<ClassInfo, String> connectionsList = classInfo.getConnections();
-		for(ClassInfo key: connectionsList.keySet()) {
-			if(connectionsList.get(key) == "ASSOCIATION") {
-				message += key.getName() + ", ";
-			}
+	public List<String> handleRequest(String className, String connectionType, List<String> message) {
+		String msg = message.get(0);
+		if(connectionType == "ASSOCIATION") {
+			msg += className + ", ";
+			message.set(0, msg);
+		} else if(successor != null) {
+			return successor.handleRequest(className, connectionType, message);
 		}
-		//message = message.substring(0, message.length()-2);
-		message += "<br/>}";
-		if(successor == null) {
-			return message;
-		}
-		return successor.handleRequest(classInfo, message);
+		return message;
 	}
 }

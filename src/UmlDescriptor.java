@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,8 +17,8 @@ public class UmlDescriptor extends JPanel implements Observer {
 		associationHandler = new AssociationHandler();
 		inheritanceHandler = new InheritanceHandler();
 		compositionHandler = new CompositionHandler();
+		associationHandler.setSuccessor(inheritanceHandler);
 		inheritanceHandler.setSuccessor(compositionHandler);
-		compositionHandler.setSuccessor(associationHandler);
 	}
 
 	@Override
@@ -24,17 +26,38 @@ public class UmlDescriptor extends JPanel implements Observer {
 		List<ClassInfo> classList = ((ClassData)o).getClassList();
 		String displayMessage = "";
 		for (ClassInfo classInfo : classList) {
-			displayMessage += "class " + classInfo.getName();
-			if(classInfo.getConnections().size() > 0) {
-				displayMessage += this.addDependencies(classInfo);
-			}
+			displayMessage += "class " + classInfo.getName() + " ";
+			displayMessage += this.addDependencies(classInfo);
 			displayMessage += "<br/>}<br/>";
 		}
 		this.showClassDescription(displayMessage);
 	}
 	
 	public String addDependencies(ClassInfo classInfo) {
-		return inheritanceHandler.handleRequest(classInfo, "");
+		List<String> connectedClasses = new ArrayList<String>();
+		connectedClasses.add(""); //association classes
+		connectedClasses.add(""); //inheritance classes
+		connectedClasses.add(""); //composition classes
+		Map<ClassInfo, String> connectionsList = classInfo.getConnections();
+		for(ClassInfo key: connectionsList.keySet()) {
+			connectedClasses = associationHandler.handleRequest(key.getName(), connectionsList.get(key), connectedClasses);
+		}
+		return formDisplayMessage(connectedClasses);
+	}
+	
+	private String formDisplayMessage(List<String> connectedClasses) {
+		String message = "";
+		if(connectedClasses.get(1).length() > 0) {
+			message += "extends " + connectedClasses.get(1).substring(0, connectedClasses.get(1).length()-2);
+		}
+		message += "{ <br/>";
+		if(connectedClasses.get(2).length() > 0) {
+			message += connectedClasses.get(2) + " <br/>".substring(0, connectedClasses.get(2).length()-2);
+		}
+		if(connectedClasses.get(0).length() > 0) {
+			message += "method() { <br/>" + connectedClasses.get(0).substring(0, connectedClasses.get(0).length()-2) + "<br/> } <br/>";
+		}
+		return message;
 	}
 	
 	private void showClassDescription(String message) {

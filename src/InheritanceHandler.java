@@ -1,4 +1,4 @@
-import java.util.Map;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -27,19 +27,14 @@ public class InheritanceHandler implements ConnectionDecisionHandlerInterface {
 	}
 
 	@Override
-	public String handleRequest(ClassInfo classInfo, String message) {
-		//message += " extends ";
-		Map<ClassInfo, String> connectionsList = classInfo.getConnections();
-		for(ClassInfo key: connectionsList.keySet()) {
-			if(connectionsList.get(key) == "INHERITANCE") {
-				message += key.getName() + ", ";
-			}
+	public List<String> handleRequest(String className, String connectionType, List<String> message) {
+		String msg = message.get(1);
+		if(connectionType == "INHERITANCE") {
+			msg += className + ", ";
+			message.set(1, msg);
+		} else if(successor != null) {
+			return successor.handleRequest(className, connectionType, message);
 		}
-		//message = message.substring(0, message.length()-2);
-		message += "{ <br/>";
-		if(successor == null) {
-			return message;
-		}
-		return successor.handleRequest(classInfo, message);
+		return message;
 	}
 }
