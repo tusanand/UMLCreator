@@ -6,10 +6,18 @@ import javax.swing.JPanel;
 public class Connection {
 	List<ClassInfo> selectedClasses;
 	JPanel panel;
+	ConnectionDecisionHandlerInterface associationHandler;
+	ConnectionDecisionHandlerInterface inheritanceHandler;
+	ConnectionDecisionHandlerInterface compositionHandler;
 	
 	Connection(JPanel panel) {
 		this.panel = panel;
 		selectedClasses = new ArrayList<ClassInfo>();
+		associationHandler = new AssociationHandler();
+		inheritanceHandler = new InheritanceHandler();
+		compositionHandler = new CompositionHandler();
+		associationHandler.setSuccessor(inheritanceHandler);
+		inheritanceHandler.setSuccessor(compositionHandler);
 	}
 	
 	public boolean checkIfExist(int x, int y) {
@@ -21,17 +29,16 @@ public class Connection {
 				}
 				if(selectedClasses.size() == 1) {
 					selectedClasses.add(classInfo);
-					
-					ConnectClassInterface line = new DrawLine(panel);
-					//TODO: implement chain of responsibility to add decoration on line
-					//current implementation is for association, move this to different classes as per chain of responsibility
-					LineDecorator associate = new DrawAssociation();
-					associate.decorate(line);
-					associate.draw(selectedClasses.get(0).getX(), selectedClasses.get(0).getY(), selectedClasses.get(1).getX(), selectedClasses.get(1).getY());
-					ClassData.getInstance().addConnectionType(classInfo, "ASSOCIATION");
-					StatusLogger.getInstance().showMessage("Connected classes using association");
+					associationHandler.handleRequest(
+							selectedClasses.get(0).getX(), 
+							selectedClasses.get(0).getY(), 
+							selectedClasses.get(1).getX(), 
+							selectedClasses.get(1).getY(), 
+							"ASSOCIATION", 
+							selectedClasses.get(0), 
+							selectedClasses.get(1),
+							panel);
 					this.clearSelection();
-					
 					return true;
 				}
 				selectedClasses.add(classInfo);

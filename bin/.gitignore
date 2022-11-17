@@ -17,3 +17,7 @@
 /DrawAssociation.class
 /DrawComposition.class
 /DrawInheritance.class
+/ConnectionDecisionHandlerInterface.class
+/AssociationHandler.class
+/InheritanceHandler.class
+/CompositionHandler.class

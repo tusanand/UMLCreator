@@ -28,8 +28,10 @@ public class ClassData extends Observable {
 		return classInfoList;
 	}
 	
-	public void addConnectionType(ClassInfo classInfo, String connectionType) {
-		classInfoList.get(classInfoList.indexOf(classInfo)).setConnections(classInfo, connectionType);
+	public void addConnectionType(ClassInfo parentClass, ClassInfo childClass, String connectionType) {
+		classInfoList.get(classInfoList.indexOf(parentClass)).setConnections(childClass, connectionType);
+		setChanged();
+		notifyObservers();
 	}
 
 }
