@@ -10,6 +10,9 @@ import javax.swing.JRadioButton;
 @SuppressWarnings("serial")
 public class ButtonActions extends JFrame implements ActionListener {
 	protected JButton connectionTypeSetter;
+	protected JButton saveFile;
+	protected JButton loadFile;
+	protected JButton help;
 	protected JPanel chooseConnectionType;
 	protected JRadioButton associationBtn;
 	protected JRadioButton inheritanceBtn;
@@ -33,6 +36,9 @@ public class ButtonActions extends JFrame implements ActionListener {
 			umlDesigner.connection.setGlobalConnectionType("INHERITANCE");
 		} else if(e.getSource() == this.compositionBtn) {
 			umlDesigner.connection.setGlobalConnectionType("COMPOSITION");
+		} else if(e.getSource() == this.saveFile) {
+			FileHandler fileHandler = new FileHandler();
+			fileHandler.selectSaveFile("Save");
 		}
 	}
 

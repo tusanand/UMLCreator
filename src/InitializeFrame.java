@@ -49,6 +49,24 @@ public class InitializeFrame extends ButtonActions {
 	    connectionTypeSetter.addActionListener(this);
 	    this.getContentPane().add(connectionTypeSetter);
 	    
+	    saveFile = new JButton("Save File");
+	    saveFile.setFont(new Font("Iosevka", Font.BOLD, 12));
+	    saveFile.setBounds(180, 20, 100, 20);
+	    saveFile.addActionListener(this);
+	    this.getContentPane().add(saveFile);
+	    
+	    loadFile = new JButton("Load File");
+	    loadFile.setFont(new Font("Iosevka", Font.BOLD, 12));
+	    loadFile.setBounds(285, 20, 100, 20);
+	    loadFile.addActionListener(this);
+	    this.getContentPane().add(loadFile);
+	    
+	    help = new JButton("Help");
+	    help.setFont(new Font("Iosevka", Font.BOLD, 12));
+	    help.setBounds(390, 20, 100, 20);
+	    help.addActionListener(this);
+	    this.getContentPane().add(help);
+	    
 	    associationBtn = new JRadioButton("ASSOCIATION");
 	    associationBtn.setMnemonic(KeyEvent.VK_B);
 	    associationBtn.setActionCommand("ASSOCIATION");

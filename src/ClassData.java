@@ -36,5 +36,9 @@ public class ClassData extends Observable {
 		setChanged();
 		notifyObservers();
 	}
+	
+	public void clearData() {
+		classInfoList.clear();
+	}
 
 }

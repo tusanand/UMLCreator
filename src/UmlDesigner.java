@@ -13,7 +13,7 @@ public class UmlDesigner extends JPanel implements MouseListener {
 		connection = new Connection(this);
 	}
 	
-	private void storeClassInfo(int x, int y, String name) {
+	public void storeClassInfo(int x, int y, String name) {
 		ClassInfo classInfo = new ClassInfo();
 		classInfo.setX(x);
 		classInfo.setY(y);
