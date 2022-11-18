@@ -19,7 +19,8 @@ public class InitializeFrame extends ButtonActions {
 	@SuppressWarnings("deprecation")
 	private void initialize() {
 		this.setTitle("UML DESIGNER");
-	    this.setBounds(10, 10, 550,700);
+	    this.setBounds(10, 10, 535, 650);
+	    this.setResizable(false);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.getContentPane().setLayout(null);
 	    

@@ -26,7 +26,7 @@ public class ButtonActions extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.connectionTypeSetter) {
-			JOptionPane.showMessageDialog(this, chooseConnectionType);
+			JOptionPane.showMessageDialog(this, chooseConnectionType, "Connection type", JOptionPane.INFORMATION_MESSAGE);
 		} else if(e.getSource() == this.associationBtn) {
 			umlDesigner.connection.setGlobalConnectionType("ASSOCIATION");
 		} else if(e.getSource() == this.inheritanceBtn) {
