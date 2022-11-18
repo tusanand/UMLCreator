@@ -57,7 +57,7 @@ public class UmlDescriptor extends JPanel implements Observer {
 		}
 		message += "{ <br/>";
 		if(connectedClasses.get(2).length() > 0) {
-			message += connectedClasses.get(2) + " <br/>".substring(0, connectedClasses.get(2).length()-2);
+			message += connectedClasses.get(2).substring(0, connectedClasses.get(2).length()-2) + " <br/>";
 		}
 		if(connectedClasses.get(0).length() > 0) {
 			message += "method() { <br/>" + connectedClasses.get(0).substring(0, connectedClasses.get(0).length()-2) + "<br/> } <br/>";

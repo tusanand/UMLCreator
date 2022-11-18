@@ -9,6 +9,7 @@ public class Connection {
 	ConnectionDecisionHandlerInterface associationHandler;
 	ConnectionDecisionHandlerInterface inheritanceHandler;
 	ConnectionDecisionHandlerInterface compositionHandler;
+	private String globalConnectionType = "ASSOCIATION"; //default value
 	
 	Connection(JPanel panel) {
 		this.panel = panel;
@@ -20,9 +21,8 @@ public class Connection {
 		inheritanceHandler.setSuccessor(compositionHandler);
 	}
 	
-	private String getGlobalConnectionType() {
-		//TODO: change this to set from globally using radio button
-		return "ASSOCIATION";
+	public void setGlobalConnectionType(String connectionType) {
+		this.globalConnectionType = connectionType;
 	}
 	
 	public boolean checkIfExist(int x, int y) {
@@ -39,7 +39,7 @@ public class Connection {
 							selectedClasses.get(0).getY(), 
 							selectedClasses.get(1).getX(), 
 							selectedClasses.get(1).getY(), 
-							getGlobalConnectionType(), 
+							globalConnectionType, 
 							selectedClasses.get(0), 
 							selectedClasses.get(1),
 							panel);
