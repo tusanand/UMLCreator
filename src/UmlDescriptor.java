@@ -12,6 +12,7 @@ public class UmlDescriptor extends JPanel implements Observer {
 	ConnectionDecisionHandlerInterface associationHandler;
 	ConnectionDecisionHandlerInterface inheritanceHandler;
 	ConnectionDecisionHandlerInterface compositionHandler;
+	List<ClassInfo> classList;
 	
 	UmlDescriptor() {
 		associationHandler = new AssociationHandler();
@@ -23,7 +24,7 @@ public class UmlDescriptor extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		List<ClassInfo> classList = ((ClassData)o).getClassList();
+		classList = ((ClassData)o).getClassList();
 		String displayMessage = "";
 		for (ClassInfo classInfo : classList) {
 			displayMessage += "class " + classInfo.getName() + " ";
@@ -38,9 +39,13 @@ public class UmlDescriptor extends JPanel implements Observer {
 		connectedClasses.add(""); //association classes
 		connectedClasses.add(""); //inheritance classes
 		connectedClasses.add(""); //composition classes
-		Map<ClassInfo, String> connectionsList = classInfo.getConnections();
-		for(ClassInfo key: connectionsList.keySet()) {
-			connectedClasses = associationHandler.handleRequest(key.getName(), connectionsList.get(key), connectedClasses);
+		Map<Integer, String> connectionsList = classInfo.getConnections();
+		for(Integer key: connectionsList.keySet()) {
+			for (ClassInfo info : classList) {
+				if(info.getId() == key) {
+					connectedClasses = associationHandler.handleRequest(info.getName(), connectionsList.get(key), connectedClasses);
+				}
+			}
 		}
 		return formDisplayMessage(connectedClasses);
 	}

@@ -6,9 +6,11 @@ import java.util.Observable;
 public class ClassData extends Observable {
 	private static ClassData classData;
 	private List<ClassInfo> classInfoList;
+	int idGenerator;
 	
 	private ClassData() {
 		classInfoList = new ArrayList<ClassInfo>();
+		idGenerator = 1;
 	}
 	
 	public static ClassData getInstance() {
@@ -19,6 +21,7 @@ public class ClassData extends Observable {
 	}
 	
 	public void addClass(ClassInfo classInfo) {
+		classInfo.setId(idGenerator++);
 		this.classInfoList.add(classInfo);
 		setChanged();
 		notifyObservers();
@@ -29,7 +32,7 @@ public class ClassData extends Observable {
 	}
 	
 	public void addConnectionType(ClassInfo parentClass, ClassInfo childClass, String connectionType) {
-		classInfoList.get(classInfoList.indexOf(parentClass)).setConnections(childClass, connectionType);
+		classInfoList.get(classInfoList.indexOf(parentClass)).setConnections(childClass.getId(), connectionType);
 		setChanged();
 		notifyObservers();
 	}

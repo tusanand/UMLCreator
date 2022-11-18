@@ -1,9 +1,9 @@
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
-public class StatusLogger extends JPanel {
+public class StatusLogger {
 	private static StatusLogger statusLogger;
+	private JPanel panel;
 	
 	private StatusLogger() {
 	}
@@ -15,12 +15,16 @@ public class StatusLogger extends JPanel {
 		return statusLogger;
 	}
 	
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
+	
 	public void showMessage(String message) {
-		removeAll();
+		panel.removeAll();
 		JLabel label = new JLabel("<html>" + message + "</html>");
-		this.add(label);
-		this.revalidate();
-		this.repaint();
+		panel.add(label);
+		panel.revalidate();
+		panel.repaint();
 	}
 
 }

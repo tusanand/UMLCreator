@@ -2,11 +2,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ClassInfo {
+	private int id;
 	private int x;
 	private int y;
 	private String name;
-	private Map<ClassInfo, String> connectionsList = new HashMap<ClassInfo, String>();
+	private Map<Integer, String> connectionsList = new HashMap<Integer, String>();
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getX() {
 		return x;
 	}
@@ -25,10 +32,10 @@ public class ClassInfo {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Map<ClassInfo, String> getConnections() {
+	public Map<Integer, String> getConnections() {
 		return connectionsList;
 	}
-	public void setConnections(ClassInfo classInfo, String type) {
-		this.connectionsList.put(classInfo, type);
+	public void setConnections(int id, String type) {
+		this.connectionsList.put(id, type);
 	}
 }
