@@ -18,6 +18,11 @@ public final class Config {
 
     // public static Font BUTTON_FONT = new Font("Iosevka", Font.BOLD, 35);
 
+    public static int BOX_WIDTH = 70;
+    public static int BOX_HEIGHT = 40;
+
+    public static int BOX_TEXT_OFFSET = 5;
+
     public static int BUTTON_HEIGHT = 80;
 
     public static int BTN_RUN_WIDTH = 180;

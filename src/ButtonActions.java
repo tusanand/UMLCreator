@@ -50,6 +50,9 @@ public class ButtonActions extends JFrame implements ActionListener {
 		} else if (e.getSource() == this.saveMenuItem) {
 			FileHandler fileHandler = new FileHandler();
 			fileHandler.selectSaveFile("Save");
+		} else if (e.getSource() == this.loadMenuItem) {
+			FileHandler fileHandler = new FileHandler();
+			fileHandler.selectSaveFile("Load");
 		}
 	}
 
