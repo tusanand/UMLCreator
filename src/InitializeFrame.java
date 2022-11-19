@@ -1,11 +1,12 @@
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -15,89 +16,101 @@ public class InitializeFrame extends ButtonActions {
 		this.initialize();
 		this.setVisible(true);
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	private void initialize() {
 		this.setTitle("UML DESIGNER");
-	    this.setBounds(10, 10, 535, 650);
-	    this.setResizable(false);
-	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    this.getContentPane().setLayout(null);
-	    
-	    UmlDescriptor umlDescriptor = new UmlDescriptor();
-	    umlDescriptor.setBackground(Color.white);
-	    umlDescriptor.setBounds(5, 50, 150, 440);
-	    umlDescriptor.setBorder(BorderFactory.createLineBorder(Color.black));
-	    this.getContentPane().add(umlDescriptor);
-	    
-	    umlDesigner = new UmlDesigner();
-	    umlDesigner.setBackground(Color.white);
-	    umlDesigner.setBounds(160, 50, 350, 440);
-	    umlDesigner.setBorder(BorderFactory.createLineBorder(Color.black));
-	    this.getContentPane().add(umlDesigner);
-	    
-	    JPanel loggerPanel = new JPanel();
-	    loggerPanel.setBackground(Color.white);
-	    loggerPanel.setBounds(5, 500, 505, 100);
-	    loggerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-	    StatusLogger.getInstance().setPanel(loggerPanel);
-	    this.getContentPane().add(loggerPanel);
-	    
-	    connectionTypeSetter = new JButton("Set Connection Type");
-	    connectionTypeSetter.setFont(new Font("Iosevka", Font.BOLD, 12));
-	    connectionTypeSetter.setBounds(5, 20, 170, 20);
-	    connectionTypeSetter.addActionListener(this);
-	    this.getContentPane().add(connectionTypeSetter);
-	    
-	    saveFile = new JButton("Save File");
-	    saveFile.setFont(new Font("Iosevka", Font.BOLD, 12));
-	    saveFile.setBounds(180, 20, 100, 20);
-	    saveFile.addActionListener(this);
-	    this.getContentPane().add(saveFile);
-	    
-	    loadFile = new JButton("Load File");
-	    loadFile.setFont(new Font("Iosevka", Font.BOLD, 12));
-	    loadFile.setBounds(285, 20, 100, 20);
-	    loadFile.addActionListener(this);
-	    this.getContentPane().add(loadFile);
-	    
-	    help = new JButton("Help");
-	    help.setFont(new Font("Iosevka", Font.BOLD, 12));
-	    help.setBounds(390, 20, 100, 20);
-	    help.addActionListener(this);
-	    this.getContentPane().add(help);
-	    
-	    associationBtn = new JRadioButton("ASSOCIATION");
-	    associationBtn.setMnemonic(KeyEvent.VK_B);
-	    associationBtn.setActionCommand("ASSOCIATION");
-	    associationBtn.setSelected(true);
+		this.setBounds(Config.WINDOW_START_X, Config.WINDOW_START_Y, Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setLayout(null);
 
-	    inheritanceBtn = new JRadioButton("INHERITANCE");
-	    inheritanceBtn.setMnemonic(KeyEvent.VK_B);
-	    inheritanceBtn.setActionCommand("INHERITANCE");
-	    inheritanceBtn.setSelected(false);
-	    
-	    compositionBtn = new JRadioButton("COMPOSITION");
-	    compositionBtn.setMnemonic(KeyEvent.VK_B);
-	    compositionBtn.setActionCommand("COMPOSITION");
-	    compositionBtn.setSelected(false);
+		UmlDescriptor umlDescriptor = new UmlDescriptor();
+		umlDescriptor.setBackground(Color.white);
+		umlDescriptor.setBounds(Config.PADDING, Config.PADDING, Config.DESCRIPTOR_WIDTH,
+				Config.UML_DESCRIPTOR_HEIGHT);
+		umlDescriptor.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.getContentPane().add(umlDescriptor);
 
-	    //Group the radio buttons.
-	    ButtonGroup group = new ButtonGroup();
-	    group.add(associationBtn);
-	    group.add(inheritanceBtn);
-	    group.add(compositionBtn);
-	    
-	    chooseConnectionType = new JPanel();
-	    chooseConnectionType.add(associationBtn);
-	    chooseConnectionType.add(inheritanceBtn);
-	    chooseConnectionType.add(compositionBtn);
+		umlDesigner = new UmlDesigner();
+		umlDesigner.setBackground(Color.white);
+		umlDesigner.setBounds(Config.PADDING + Config.DESCRIPTOR_WIDTH + Config.OFFSET, Config.PADDING,
+				Config.UML_WIDTH,
+				Config.UML_DESCRIPTOR_HEIGHT);
+		umlDesigner.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.getContentPane().add(umlDesigner);
 
-	    //Register a listener for the radio buttons.
-	    associationBtn.addActionListener(this);
-	    inheritanceBtn.addActionListener(this);
-	    compositionBtn.addActionListener(this);
-	    
-	    ClassData.getInstance().addObserver(umlDescriptor);
+		menuBar = new JMenuBar();
+
+		fileMenu = new JMenu("File");
+		fileMenu.setMnemonic(KeyEvent.VK_F);
+		menuBar.add(fileMenu);
+
+		newMenuItem = new JMenuItem("New", KeyEvent.VK_N);
+		newMenuItem.addActionListener(this);
+		fileMenu.add(newMenuItem);
+
+		saveMenuItem = new JMenuItem("Save As", KeyEvent.VK_A);
+		saveMenuItem.addActionListener(this);
+		fileMenu.add(saveMenuItem);
+
+		loadMenuItem = new JMenuItem("Load", KeyEvent.VK_L);
+		loadMenuItem.addActionListener(this);
+		fileMenu.add(loadMenuItem);
+
+		connectionSetterMenuItem = new JMenuItem("Set Connection Type", KeyEvent.VK_T);
+		connectionSetterMenuItem.addActionListener(this);
+		fileMenu.add(connectionSetterMenuItem);
+
+		exitMenuItem = new JMenuItem("Exit", KeyEvent.VK_X);
+		exitMenuItem.addActionListener(this);
+		fileMenu.add(exitMenuItem);
+
+		helpMenu = new JMenu("Help");
+		helpMenu.setMnemonic(KeyEvent.VK_H);
+		menuBar.add(helpMenu);
+
+		this.setJMenuBar(menuBar);
+
+		associationBtn = new JRadioButton("ASSOCIATION");
+		associationBtn.setMnemonic(KeyEvent.VK_B);
+		associationBtn.setActionCommand("ASSOCIATION");
+		associationBtn.setSelected(true);
+
+		inheritanceBtn = new JRadioButton("INHERITANCE");
+		inheritanceBtn.setMnemonic(KeyEvent.VK_B);
+		inheritanceBtn.setActionCommand("INHERITANCE");
+		inheritanceBtn.setSelected(false);
+
+		compositionBtn = new JRadioButton("COMPOSITION");
+		compositionBtn.setMnemonic(KeyEvent.VK_B);
+		compositionBtn.setActionCommand("COMPOSITION");
+		compositionBtn.setSelected(false);
+
+		// Group the radio buttons.
+		ButtonGroup group = new ButtonGroup();
+		group.add(associationBtn);
+		group.add(inheritanceBtn);
+		group.add(compositionBtn);
+
+		chooseConnectionType = new JPanel();
+		chooseConnectionType.add(associationBtn);
+		chooseConnectionType.add(inheritanceBtn);
+		chooseConnectionType.add(compositionBtn);
+
+		// Register a listener for the radio buttons.
+		associationBtn.addActionListener(this);
+		inheritanceBtn.addActionListener(this);
+		compositionBtn.addActionListener(this);
+
+		JPanel loggerPanel = new JPanel();
+		loggerPanel.setBackground(Color.white);
+		loggerPanel.setBounds(0, 2 * Config.PADDING + Config.UML_DESCRIPTOR_HEIGHT, Config.WINDOW_WIDTH,
+				Config.LOGGER_HEIGHT);
+		loggerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		StatusLogger.getInstance().setPanel(loggerPanel);
+		this.getContentPane().add(loggerPanel);
+
+		ClassData.getInstance().addObserver(umlDescriptor);
 	}
 }
