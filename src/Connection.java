@@ -51,7 +51,7 @@ public class Connection {
 	public boolean checkIfExist(int x, int y) {
 		List<ClassInfo> classInfoList = ClassData.getInstance().getClassList();
 		for (ClassInfo classInfo : classInfoList) {
-			if (x >= classInfo.getX()-35 && x <= classInfo.getX()+35 && y >= classInfo.getY()-25 && y <= classInfo.getY()+25) {
+			if (x >= classInfo.getX()-Config.BOX_WIDTH/2 && x <= classInfo.getX()+Config.BOX_WIDTH/2 && y >= classInfo.getY()-Config.BOX_HEIGHT/2 && y <= classInfo.getY()+Config.BOX_HEIGHT/2) {
 				if(selectedClasses.contains(classInfo)) {
 					return true;
 				}
