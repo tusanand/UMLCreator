@@ -15,6 +15,7 @@ public class ButtonActions extends JFrame implements ActionListener {
 	protected JRadioButton associationBtn;
 	protected JRadioButton inheritanceBtn;
 	protected JRadioButton compositionBtn;
+	protected JPanel teamInfoPanel;
 
 	protected JMenuBar menuBar;
 	protected JMenu fileMenu;
@@ -22,6 +23,7 @@ public class ButtonActions extends JFrame implements ActionListener {
 	protected JMenuItem loadMenuItem;
 	protected JMenuItem connectionSetterMenuItem;
 	protected JMenu helpMenu;
+	protected JMenuItem about;
 	protected UmlDesigner umlDesigner;
 	protected FileHandler fileHandler;
 
@@ -45,6 +47,8 @@ public class ButtonActions extends JFrame implements ActionListener {
 			fileHandler.selectSaveFile("Save");
 		} else if (e.getSource() == this.loadMenuItem) {
 			fileHandler.selectSaveFile("Load");
+		} else if (e.getSource() == this.about) {
+			JOptionPane.showMessageDialog(this, teamInfoPanel, "Team Information", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 

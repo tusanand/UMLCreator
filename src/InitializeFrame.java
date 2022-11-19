@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -49,7 +50,7 @@ public class InitializeFrame extends ButtonActions {
 		fileMenu.setMnemonic(KeyEvent.VK_F);
 		menuBar.add(fileMenu);
 
-		saveMenuItem = new JMenuItem("Save As", KeyEvent.VK_A);
+		saveMenuItem = new JMenuItem("Save As", KeyEvent.VK_S);
 		saveMenuItem.addActionListener(this);
 		fileMenu.add(saveMenuItem);
 
@@ -57,28 +58,32 @@ public class InitializeFrame extends ButtonActions {
 		loadMenuItem.addActionListener(this);
 		fileMenu.add(loadMenuItem);
 
-		connectionSetterMenuItem = new JMenuItem("Connection Type", KeyEvent.VK_T);
+		connectionSetterMenuItem = new JMenuItem("Connection Type", KeyEvent.VK_C);
 		connectionSetterMenuItem.addActionListener(this);
 		fileMenu.add(connectionSetterMenuItem);
 
 		helpMenu = new JMenu("Help");
 		helpMenu.setMnemonic(KeyEvent.VK_H);
 		menuBar.add(helpMenu);
+		
+		about = new JMenuItem("About", KeyEvent.VK_A);
+		about.addActionListener(this);
+		helpMenu.add(about);
 
 		this.setJMenuBar(menuBar);
 
 		associationBtn = new JRadioButton("ASSOCIATION");
-		associationBtn.setMnemonic(KeyEvent.VK_B);
+		associationBtn.setMnemonic(KeyEvent.VK_A);
 		associationBtn.setActionCommand("ASSOCIATION");
 		associationBtn.setSelected(true);
 
 		inheritanceBtn = new JRadioButton("INHERITANCE");
-		inheritanceBtn.setMnemonic(KeyEvent.VK_B);
+		inheritanceBtn.setMnemonic(KeyEvent.VK_I);
 		inheritanceBtn.setActionCommand("INHERITANCE");
 		inheritanceBtn.setSelected(false);
 
 		compositionBtn = new JRadioButton("COMPOSITION");
-		compositionBtn.setMnemonic(KeyEvent.VK_B);
+		compositionBtn.setMnemonic(KeyEvent.VK_D);
 		compositionBtn.setActionCommand("COMPOSITION");
 		compositionBtn.setSelected(false);
 
@@ -97,6 +102,16 @@ public class InitializeFrame extends ButtonActions {
 		associationBtn.addActionListener(this);
 		inheritanceBtn.addActionListener(this);
 		compositionBtn.addActionListener(this);
+		
+		teamInfoPanel = new JPanel();
+		String info = "Tushar Anand - 1219436270 <br/>"
+				+ "Vaibhav Somani - ASU ID <br/>"
+				+ "Madhavan Raja - ASU ID <br/>"
+				+ "Kyle - ASU ID <br/>"
+				+ "Amber - ASU ID <br/>";
+		JLabel teamInfo = new JLabel("<html>" + info + "</html>");
+		teamInfoPanel.add(teamInfo);
+		
 
 		JPanel loggerPanel = new JPanel();
 		loggerPanel.setBackground(Color.white);
