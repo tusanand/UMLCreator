@@ -38,11 +38,11 @@ public class ButtonActions extends JFrame implements ActionListener {
 		if (e.getSource() == this.connectionSetterMenuItem) {
 			JOptionPane.showMessageDialog(this, chooseConnectionType, "Connection Type", JOptionPane.INFORMATION_MESSAGE);
 		} else if (e.getSource() == this.associationBtn) {
-			umlDesigner.connection.setGlobalConnectionType("ASSOCIATION");
+			umlDesigner.getConnection().setGlobalConnectionType("ASSOCIATION");
 		} else if (e.getSource() == this.inheritanceBtn) {
-			umlDesigner.connection.setGlobalConnectionType("INHERITANCE");
+			umlDesigner.getConnection().setGlobalConnectionType("INHERITANCE");
 		} else if (e.getSource() == this.compositionBtn) {
-			umlDesigner.connection.setGlobalConnectionType("COMPOSITION");
+			umlDesigner.getConnection().setGlobalConnectionType("COMPOSITION");
 		} else if (e.getSource() == this.saveMenuItem) {
 			fileHandler.selectSaveFile("Save");
 		} else if (e.getSource() == this.loadMenuItem) {

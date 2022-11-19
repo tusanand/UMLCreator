@@ -12,18 +12,18 @@ public class CompositionHandler implements ConnectionDecisionHandlerInterface {
 	}
 		
 	@Override
-	public void handleRequest(int x1, int y1, int x2, int y2, String connectionType, ClassInfo parentClass, ClassInfo childClass, JPanel panel) {
-		if(connectionType == "COMPOSITION") {
+	public void handleRequest(String connectionType, ClassInfo parentClass, ClassInfo childClass, JPanel panel) {
+		if(connectionType.equals("COMPOSITION")) {
 			ConnectClassInterface line = new DrawLine(panel);
 			LineDecorator associate = new DrawAssociation();
 			LineDecorator compose = new DrawComposition();
 			associate.decorate(line);
 			compose.decorate(associate);
-			compose.draw(x1, y1, x2, y2);
+			compose.draw(parentClass.getX(), parentClass.getY(), childClass.getX(), childClass.getY());
 			ClassData.getInstance().addConnectionType(parentClass, childClass, connectionType);
 			StatusLogger.getInstance().showMessage("Connected classes using composition");
 		} else if(successor != null) {
-			successor.handleRequest(x1, y1, x2, y2, connectionType, parentClass, childClass, panel);
+			successor.handleRequest(connectionType, parentClass, childClass, panel);
 		}
 		
 	}
@@ -31,7 +31,7 @@ public class CompositionHandler implements ConnectionDecisionHandlerInterface {
 	@Override
 	public List<String> handleRequest(String className, String connectionType, List<String> message) {
 		String msg = message.get(2);
-		if(connectionType == "COMPOSITION") {
+		if(connectionType.equals("COMPOSITION")) {
 			msg += className + ", ";
 			message.set(2, msg);
 		} else if(successor != null) {

@@ -1,14 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
 public class Connection {
-	List<ClassInfo> selectedClasses;
-	JPanel panel;
-	ConnectionDecisionHandlerInterface associationHandler;
-	ConnectionDecisionHandlerInterface inheritanceHandler;
-	ConnectionDecisionHandlerInterface compositionHandler;
+	private List<ClassInfo> selectedClasses;
+	private JPanel panel;
+	private ConnectionDecisionHandlerInterface associationHandler;
+	private ConnectionDecisionHandlerInterface inheritanceHandler;
+	private ConnectionDecisionHandlerInterface compositionHandler;
 	private String globalConnectionType = "ASSOCIATION"; //default value
 	
 	Connection(JPanel panel) {
@@ -21,20 +22,30 @@ public class Connection {
 		inheritanceHandler.setSuccessor(compositionHandler);
 	}
 	
-	public void setGlobalConnectionType(String connectionType) {
-		this.globalConnectionType = connectionType;
+	private void connectClasses(ClassInfo parentClass, ClassInfo childClass, String connectionType) {
+		associationHandler.handleRequest(
+				connectionType, 
+				parentClass, 
+				childClass,
+				panel);
 	}
 	
-	public void connectClasses() {
-		associationHandler.handleRequest(
-				selectedClasses.get(0).getX(), 
-				selectedClasses.get(0).getY(), 
-				selectedClasses.get(1).getX(), 
-				selectedClasses.get(1).getY(), 
-				globalConnectionType, 
-				selectedClasses.get(0), 
-				selectedClasses.get(1),
-				panel);
+	public void connectClasses(List<ClassInfo> classInfoList) {
+		for(ClassInfo parentClass: classInfoList) {
+			Map<Integer, String> parentClassConnections = parentClass.getConnections();
+			for(Integer key: parentClassConnections.keySet()) {
+				for(ClassInfo childClass: ClassData.getInstance().getClassList()) {
+					if(childClass.getId() == key) {
+						this.connectClasses(ClassData.getInstance().getClassList().get(classInfoList.indexOf(parentClass)), childClass, parentClassConnections.get(key));
+						break;
+					}
+				}
+			}
+		}
+	}
+	
+	public void setGlobalConnectionType(String connectionType) {
+		this.globalConnectionType = connectionType;
 	}
 	
 	public boolean checkIfExist(int x, int y) {
@@ -46,7 +57,10 @@ public class Connection {
 				}
 				if(selectedClasses.size() == 1) {
 					selectedClasses.add(classInfo);
-					this.connectClasses();
+					this.connectClasses(
+							selectedClasses.get(0), 
+							selectedClasses.get(1),
+							globalConnectionType);
 					this.clearSelection();
 					return true;
 				}

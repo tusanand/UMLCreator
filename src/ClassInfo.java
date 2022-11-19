@@ -2,16 +2,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ClassInfo {
-	private int id;
+	private Integer id;
 	private int x;
 	private int y;
 	private String name;
 	private Map<Integer, String> connectionsList = new HashMap<Integer, String>();
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public int getX() {

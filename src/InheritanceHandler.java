@@ -12,16 +12,16 @@ public class InheritanceHandler implements ConnectionDecisionHandlerInterface {
 	}
 		
 	@Override
-	public void handleRequest(int x1, int y1, int x2, int y2, String connectionType, ClassInfo parentClass, ClassInfo childClass, JPanel panel) {
-		if(connectionType == "INHERITANCE") {
+	public void handleRequest(String connectionType, ClassInfo parentClass, ClassInfo childClass, JPanel panel) {
+		if(connectionType.equals("INHERITANCE")) {
 			ConnectClassInterface line = new DrawLine(panel);
 			LineDecorator inherit = new DrawInheritance();
 			inherit.decorate(line);
-			inherit.draw(x1, y1, x2, y2);
+			inherit.draw(parentClass.getX(), parentClass.getY(), childClass.getX(), childClass.getY());
 			ClassData.getInstance().addConnectionType(parentClass, childClass, connectionType);
 			StatusLogger.getInstance().showMessage("Connected classes using inheritance");
 		} else if(successor != null) {
-			successor.handleRequest(x1, y1, x2, y2, connectionType, parentClass, childClass, panel);
+			successor.handleRequest(connectionType, parentClass, childClass, panel);
 		}
 		
 	}
@@ -29,7 +29,7 @@ public class InheritanceHandler implements ConnectionDecisionHandlerInterface {
 	@Override
 	public List<String> handleRequest(String className, String connectionType, List<String> message) {
 		String msg = message.get(1);
-		if(connectionType == "INHERITANCE") {
+		if(connectionType.equals("INHERITANCE")) {
 			msg += className + ", ";
 			message.set(1, msg);
 		} else if(successor != null) {

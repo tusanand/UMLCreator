@@ -20,10 +20,11 @@ public class ClassData extends Observable {
 		return classData;
 	}
 	
-	public void addClass(ClassInfo classInfo, Integer... id) {
-		if(id == null) {
-			classInfo.setId(idGenerator++);
+	public void addClass(ClassInfo classInfo) {
+		if(classInfo.getId() == null) {
+			classInfo.setId(idGenerator);
 		}
+		idGenerator++;
 		this.classInfoList.add(classInfo);
 		setChanged();
 		notifyObservers();

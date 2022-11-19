@@ -9,20 +9,23 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class UmlDesigner extends JPanel implements MouseListener, Observer {
-	Connection connection;
+	private Connection connection;
 	
 	public UmlDesigner() {
 		this.addMouseListener(this);
 		connection = new Connection(this);
 	}
 	
-	public void storeandDrawClassInfo(int x, int y, String name) {
+	private void storeandDrawClassInfo(int x, int y, String name, Integer... id) {
 		Rectangle rect = new Rectangle(this);
 		rect.draw(x, y, name);
 		ClassInfo classInfo = new ClassInfo();
 		classInfo.setX(x);
 		classInfo.setY(y);
 		classInfo.setName(name);
+		if(id.length != 0) {
+			classInfo.setId(id[0]);
+		}
 		ClassData.getInstance().addClass(classInfo);
 	}
 	
@@ -31,15 +34,17 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer {
 	public void update(Observable o, Object arg) {
 		List<ClassInfo> classInfoList = (List<ClassInfo>) arg;
 		this.drawUml(classInfoList);
+		this.connection.connectClasses(classInfoList);
 	}
 	
 	private void drawUml(List<ClassInfo> classInfoList) {
 		for(ClassInfo classInfo: classInfoList) {
-			this.storeandDrawClassInfo(classInfo.getX(), classInfo.getY(), classInfo.getName());
+			this.storeandDrawClassInfo(classInfo.getX(), classInfo.getY(), classInfo.getName(), classInfo.getId());
 		}
-		for(ClassInfo classInfo: classInfoList) {
-			
-		}
+	}
+	
+	public Connection getConnection() {
+		return this.connection;
 	}
 
 	@Override

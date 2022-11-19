@@ -9,10 +9,10 @@ import javax.swing.JPanel;
 
 @SuppressWarnings({ "serial", "deprecation" })
 public class UmlDescriptor extends JPanel implements Observer {
-	ConnectionDecisionHandlerInterface associationHandler;
-	ConnectionDecisionHandlerInterface inheritanceHandler;
-	ConnectionDecisionHandlerInterface compositionHandler;
-	List<ClassInfo> classList;
+	private ConnectionDecisionHandlerInterface associationHandler;
+	private ConnectionDecisionHandlerInterface inheritanceHandler;
+	private ConnectionDecisionHandlerInterface compositionHandler;
+	private List<ClassInfo> classList;
 	
 	UmlDescriptor() {
 		associationHandler = new AssociationHandler();

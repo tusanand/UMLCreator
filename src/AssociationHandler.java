@@ -12,23 +12,23 @@ public class AssociationHandler implements ConnectionDecisionHandlerInterface {
 	}
 		
 	@Override
-	public void handleRequest(int x1, int y1, int x2, int y2, String connectionType, ClassInfo parentClass, ClassInfo childClass, JPanel panel) {
-		if(connectionType == "ASSOCIATION") {
+	public void handleRequest(String connectionType, ClassInfo parentClass, ClassInfo childClass, JPanel panel) {
+		if(connectionType.equals("ASSOCIATION")) {
 			ConnectClassInterface line = new DrawLine(panel);
 			LineDecorator associate = new DrawAssociation();
 			associate.decorate(line);
-			associate.draw(x1, y1, x2, y2);
+			associate.draw(parentClass.getX(), parentClass.getY(), childClass.getX(), childClass.getY());
 			ClassData.getInstance().addConnectionType(parentClass, childClass, connectionType);
 			StatusLogger.getInstance().showMessage("Connected classes using association");
 		} else if(successor != null) {
-			successor.handleRequest(x1, y1, x2, y2, connectionType, parentClass, childClass, panel);
+			successor.handleRequest(connectionType, parentClass, childClass, panel);
 		}
 	}
 	
 	@Override
 	public List<String> handleRequest(String className, String connectionType, List<String> message) {
 		String msg = message.get(0);
-		if(connectionType == "ASSOCIATION") {
+		if(connectionType.contentEquals("ASSOCIATION")) {
 			msg += className + ", ";
 			message.set(0, msg);
 		} else if(successor != null) {

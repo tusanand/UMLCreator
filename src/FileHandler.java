@@ -29,7 +29,6 @@ public class FileHandler extends Observable {
 					classData += "," + key + "|" + classConnection.get(key);
 				}
 				writer.write(classData + System.lineSeparator());
-				System.out.println(classData);
 			}
 			writer.close();
 			StatusLogger.getInstance().showMessage("Data successfully saved.");

@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class DrawLine implements ConnectClassInterface {
-	Graphics g;
+	private Graphics g;
 	
 	DrawLine(JPanel panel) {
 		g = panel.getGraphics();
