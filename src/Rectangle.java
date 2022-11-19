@@ -5,15 +5,15 @@ import javax.swing.JPanel;
 public class Rectangle implements DrawRectangleInterface {
 
 	Graphics g;
-	
+
 	Rectangle(JPanel panel) {
 		g = panel.getGraphics();
 	}
-	
+
 	@Override
 	public void draw(int x, int y, String name) {
-		g.drawRect(x-35, y-25, 70, 50);
-		g.drawString(name, x-25, y);
+		g.drawRect(x - Config.BOX_WIDTH / 2, y - Config.BOX_HEIGHT / 2, Config.BOX_WIDTH, Config.BOX_HEIGHT);
+		g.drawString(name, x - Config.BOX_WIDTH / 2 + Config.BOX_TEXT_OFFSET, y);
 	}
 
 }
