@@ -26,6 +26,7 @@ public class InitializeFrame extends ButtonActions {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
 
+		//TODO: Add vertical scroll
 		UmlDescriptor umlDescriptor = new UmlDescriptor();
 		umlDescriptor.setBackground(Color.white);
 		umlDescriptor.setBounds(Config.PADDING, Config.PADDING, Config.DESCRIPTOR_WIDTH,
