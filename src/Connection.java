@@ -25,6 +25,18 @@ public class Connection {
 		this.globalConnectionType = connectionType;
 	}
 	
+	public void connectClasses() {
+		associationHandler.handleRequest(
+				selectedClasses.get(0).getX(), 
+				selectedClasses.get(0).getY(), 
+				selectedClasses.get(1).getX(), 
+				selectedClasses.get(1).getY(), 
+				globalConnectionType, 
+				selectedClasses.get(0), 
+				selectedClasses.get(1),
+				panel);
+	}
+	
 	public boolean checkIfExist(int x, int y) {
 		List<ClassInfo> classInfoList = ClassData.getInstance().getClassList();
 		for (ClassInfo classInfo : classInfoList) {
@@ -34,15 +46,7 @@ public class Connection {
 				}
 				if(selectedClasses.size() == 1) {
 					selectedClasses.add(classInfo);
-					associationHandler.handleRequest(
-							selectedClasses.get(0).getX(), 
-							selectedClasses.get(0).getY(), 
-							selectedClasses.get(1).getX(), 
-							selectedClasses.get(1).getY(), 
-							globalConnectionType, 
-							selectedClasses.get(0), 
-							selectedClasses.get(1),
-							panel);
+					this.connectClasses();
 					this.clearSelection();
 					return true;
 				}

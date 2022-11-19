@@ -1,22 +1,22 @@
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Timer;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class FileHandler {
+public class FileHandler extends Observable {
+	UmlDesigner umlDesigner;
 	
-	FileHandler() {
-		
+	FileHandler(UmlDesigner umlDesigner) {
+		this.umlDesigner = umlDesigner;
 	}
 	
 	private void saveToFile(String filePath) {
@@ -50,19 +50,35 @@ public class FileHandler {
 				StatusLogger.getInstance().showMessage("No saved data found.");
 				return;
 			}
-			FileInputStream readData = new FileInputStream(filePath);
-			ObjectInputStream readStream = new ObjectInputStream(readData);
-			List<ClassInfo> dotLocations = (List<ClassInfo>) readStream.readObject();
-			readStream.close();
-			if (dotLocations.isEmpty()) {
+			List<String> lines = Files.readAllLines(Paths.get(filePath));
+			if (lines.isEmpty()) {
 				StatusLogger.getInstance().showMessage("Saved file is empty.");
 				return;
 			}
-			//this.loopAndDraw(dotLocations);
-			StatusLogger.getInstance().showMessage("Data successfully loaded.");
+			this.parseFileData(lines);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void parseFileData(List<String> lines) {
+		List<ClassInfo> classInfoList = new ArrayList<ClassInfo>();
+		for(String line: lines) {
+			String[] classData = line.split(",");
+			ClassInfo classInfo = new ClassInfo();
+			classInfo.setId(Integer.parseInt(classData[0]));
+			classInfo.setX(Integer.parseInt(classData[1]));
+			classInfo.setY(Integer.parseInt(classData[2]));
+			classInfo.setName(classData[3]);
+			for(int i = 4; i < classData.length; i++) {
+				String[] connectionInfo = classData[i].split("\\|");
+				classInfo.setConnections(Integer.parseInt(connectionInfo[0]), connectionInfo[1]);
+			}
+			classInfoList.add(classInfo);
+		}
+		StatusLogger.getInstance().showMessage("Data successfully loaded.");
+		setChanged();
+		notifyObservers(classInfoList);
 	}
 	
 	/**

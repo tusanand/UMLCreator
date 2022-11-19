@@ -1,11 +1,14 @@
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class UmlDesigner extends JPanel implements MouseListener {
+public class UmlDesigner extends JPanel implements MouseListener, Observer {
 	Connection connection;
 	
 	public UmlDesigner() {
@@ -13,12 +16,30 @@ public class UmlDesigner extends JPanel implements MouseListener {
 		connection = new Connection(this);
 	}
 	
-	public void storeClassInfo(int x, int y, String name) {
+	public void storeandDrawClassInfo(int x, int y, String name) {
+		Rectangle rect = new Rectangle(this);
+		rect.draw(x, y, name);
 		ClassInfo classInfo = new ClassInfo();
 		classInfo.setX(x);
 		classInfo.setY(y);
 		classInfo.setName(name);
 		ClassData.getInstance().addClass(classInfo);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public void update(Observable o, Object arg) {
+		List<ClassInfo> classInfoList = (List<ClassInfo>) arg;
+		this.drawUml(classInfoList);
+	}
+	
+	private void drawUml(List<ClassInfo> classInfoList) {
+		for(ClassInfo classInfo: classInfoList) {
+			this.storeandDrawClassInfo(classInfo.getX(), classInfo.getY(), classInfo.getName());
+		}
+		for(ClassInfo classInfo: classInfoList) {
+			
+		}
 	}
 
 	@Override
@@ -33,9 +54,7 @@ public class UmlDesigner extends JPanel implements MouseListener {
 		if(name == null || name.equals("")) {
 			return;
 		}
-		Rectangle rect = new Rectangle(this);
-		rect.draw(x, y, name);
-		this.storeClassInfo(x, y, name);
+		this.storeandDrawClassInfo(x, y, name);
 	}
 
 	@Override

@@ -39,6 +39,9 @@ public class InitializeFrame extends ButtonActions {
 				Config.UML_DESCRIPTOR_HEIGHT);
 		umlDesigner.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.getContentPane().add(umlDesigner);
+		
+		fileHandler = new FileHandler(umlDesigner);
+		fileHandler.addObserver(umlDesigner);
 
 		menuBar = new JMenuBar();
 
@@ -46,25 +49,17 @@ public class InitializeFrame extends ButtonActions {
 		fileMenu.setMnemonic(KeyEvent.VK_F);
 		menuBar.add(fileMenu);
 
-		newMenuItem = new JMenuItem("New", KeyEvent.VK_N);
-		newMenuItem.addActionListener(this);
-		fileMenu.add(newMenuItem);
-
 		saveMenuItem = new JMenuItem("Save As", KeyEvent.VK_A);
 		saveMenuItem.addActionListener(this);
 		fileMenu.add(saveMenuItem);
 
-		loadMenuItem = new JMenuItem("Load", KeyEvent.VK_L);
+		loadMenuItem = new JMenuItem("Load Data", KeyEvent.VK_L);
 		loadMenuItem.addActionListener(this);
 		fileMenu.add(loadMenuItem);
 
-		connectionSetterMenuItem = new JMenuItem("Set Connection Type", KeyEvent.VK_T);
+		connectionSetterMenuItem = new JMenuItem("Connection Type", KeyEvent.VK_T);
 		connectionSetterMenuItem.addActionListener(this);
 		fileMenu.add(connectionSetterMenuItem);
-
-		exitMenuItem = new JMenuItem("Exit", KeyEvent.VK_X);
-		exitMenuItem.addActionListener(this);
-		fileMenu.add(exitMenuItem);
 
 		helpMenu = new JMenu("Help");
 		helpMenu.setMnemonic(KeyEvent.VK_H);
@@ -105,7 +100,10 @@ public class InitializeFrame extends ButtonActions {
 
 		JPanel loggerPanel = new JPanel();
 		loggerPanel.setBackground(Color.white);
-		loggerPanel.setBounds(0, 2 * Config.PADDING + Config.UML_DESCRIPTOR_HEIGHT, Config.WINDOW_WIDTH,
+		loggerPanel.setBounds(
+				Config.PADDING, 
+				2 * Config.PADDING + Config.UML_DESCRIPTOR_HEIGHT, 
+				Config.WINDOW_WIDTH - 3 * Config.PADDING, 
 				Config.LOGGER_HEIGHT);
 		loggerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		StatusLogger.getInstance().setPanel(loggerPanel);

@@ -17,20 +17,15 @@ public class ButtonActions extends JFrame implements ActionListener {
 	protected JRadioButton compositionBtn;
 
 	protected JMenuBar menuBar;
-
 	protected JMenu fileMenu;
-	protected JMenuItem newMenuItem;
 	protected JMenuItem saveMenuItem;
 	protected JMenuItem loadMenuItem;
 	protected JMenuItem connectionSetterMenuItem;
-	protected JMenuItem exitMenuItem;
-
 	protected JMenu helpMenu;
-
 	protected UmlDesigner umlDesigner;
+	protected FileHandler fileHandler;
 
 	public ButtonActions() {
-
 	}
 
 	/**
@@ -39,8 +34,7 @@ public class ButtonActions extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.connectionSetterMenuItem) {
-			JOptionPane.showMessageDialog(this, chooseConnectionType, "Connection Type",
-					JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, chooseConnectionType, "Connection Type", JOptionPane.INFORMATION_MESSAGE);
 		} else if (e.getSource() == this.associationBtn) {
 			umlDesigner.connection.setGlobalConnectionType("ASSOCIATION");
 		} else if (e.getSource() == this.inheritanceBtn) {
@@ -48,10 +42,8 @@ public class ButtonActions extends JFrame implements ActionListener {
 		} else if (e.getSource() == this.compositionBtn) {
 			umlDesigner.connection.setGlobalConnectionType("COMPOSITION");
 		} else if (e.getSource() == this.saveMenuItem) {
-			FileHandler fileHandler = new FileHandler();
 			fileHandler.selectSaveFile("Save");
 		} else if (e.getSource() == this.loadMenuItem) {
-			FileHandler fileHandler = new FileHandler();
 			fileHandler.selectSaveFile("Load");
 		}
 	}
