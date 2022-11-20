@@ -17,7 +17,7 @@ public final class Config {
     public static int LOGGER_HEIGHT = 30;
 
     public static int BOX_WIDTH = 70;
-    public static int BOX_HEIGHT = 40;
+    public static int BOX_HEIGHT = 50;
 
     public static int BOX_TEXT_OFFSET = 5;
 
@@ -38,6 +38,9 @@ public final class Config {
 
     public static int POINT_DIAMETER = 16;
     public static int HIGHLIGHT_DIAMETER = 4;
+    
+    public static int TEXTAREA_ROWS = 35;
+    public static int TEXT_AREA_COLS = 25;
 
     public static int WINDOW_HEIGHT = 7 * PADDING + UML_DESCRIPTOR_HEIGHT + LOGGER_HEIGHT;
 }

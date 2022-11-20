@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 public class Rectangle implements DrawRectangleInterface {
 
-	Graphics g;
+	private Graphics g;
 
 	Rectangle(JPanel panel) {
 		g = panel.getGraphics();

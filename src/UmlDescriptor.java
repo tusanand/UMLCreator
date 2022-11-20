@@ -1,11 +1,13 @@
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 @SuppressWarnings({ "serial", "deprecation" })
 public class UmlDescriptor extends JPanel implements Observer {
@@ -13,6 +15,7 @@ public class UmlDescriptor extends JPanel implements Observer {
 	private ConnectionDecisionHandlerInterface inheritanceHandler;
 	private ConnectionDecisionHandlerInterface compositionHandler;
 	private List<ClassInfo> classList;
+	private JTextArea textArea;
 	
 	UmlDescriptor() {
 		associationHandler = new AssociationHandler();
@@ -20,6 +23,15 @@ public class UmlDescriptor extends JPanel implements Observer {
 		compositionHandler = new CompositionHandler();
 		associationHandler.setSuccessor(inheritanceHandler);
 		inheritanceHandler.setSuccessor(compositionHandler);
+		textArea = new JTextArea(Config.TEXTAREA_ROWS, Config.TEXT_AREA_COLS);
+		textArea.setMargin(new Insets(
+				Config.PADDING,
+				Config.PADDING,
+				Config.PADDING,
+				Config.PADDING));
+		textArea.setEditable(false);
+		JScrollPane scroll = new JScrollPane(textArea);
+		this.add(scroll);
 	}
 
 	@Override
@@ -29,7 +41,7 @@ public class UmlDescriptor extends JPanel implements Observer {
 		for (ClassInfo classInfo : classList) {
 			displayMessage += "class " + classInfo.getName() + " ";
 			displayMessage += this.addDependencies(classInfo);
-			displayMessage += "<br/>}<br/>";
+			displayMessage += "}\n";
 		}
 		this.showClassDescription(displayMessage);
 	}
@@ -55,22 +67,18 @@ public class UmlDescriptor extends JPanel implements Observer {
 		if(connectedClasses.get(1).length() > 0) {
 			message += "extends " + connectedClasses.get(1).substring(0, connectedClasses.get(1).length()-2);
 		}
-		message += "{ <br/>";
+		message += " { \n";
 		if(connectedClasses.get(2).length() > 0) {
-			message += connectedClasses.get(2).substring(0, connectedClasses.get(2).length()-2) + " <br/>";
+			message += "    " + connectedClasses.get(2).substring(0, connectedClasses.get(2).length()-2) + " \n";
 		}
 		if(connectedClasses.get(0).length() > 0) {
-			message += "method() { <br/>" + connectedClasses.get(0).substring(0, connectedClasses.get(0).length()-2) + "<br/> } <br/>";
+			message += "    method() { \n" + "        " + connectedClasses.get(0).substring(0, connectedClasses.get(0).length()-2) + "\n" + "    }" + "\n";
 		}
 		return message;
 	}
 	
 	private void showClassDescription(String message) {
-		removeAll();
-		JLabel label = new JLabel("<html>" + message + "</html>");
-		this.add(label);
-		this.revalidate();
-		this.repaint();
+		textArea.setText(message);
 		StatusLogger.getInstance().showMessage("Class Added");
 	}
 

@@ -26,9 +26,15 @@ public class ButtonActions extends JFrame implements ActionListener {
 	protected JMenu helpMenu;
 	protected JMenuItem about;
 	protected UmlDesigner umlDesigner;
+	protected UmlDescriptor umlDescriptor;
 	protected FileHandler fileHandler;
 
 	public ButtonActions() {
+	}
+	
+	private void clearScreen() {
+		ClassData.getInstance().clearData();
+		umlDesigner.repaint();
 	}
 
 	/**
@@ -46,7 +52,7 @@ public class ButtonActions extends JFrame implements ActionListener {
 		} else if (e.getSource() == this.compositionBtn) {
 			umlDesigner.getConnection().setGlobalConnectionType("COMPOSITION");
 		} else if (e.getSource() == this.newMenuItem) {
-			// Clear Screen
+			this.clearScreen();
 		} else if (e.getSource() == this.saveMenuItem) {
 			fileHandler.selectSaveFile("Save");
 		} else if (e.getSource() == this.loadMenuItem) {
