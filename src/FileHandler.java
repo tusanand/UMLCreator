@@ -106,7 +106,6 @@ public class FileHandler extends Observable {
 						timer.cancel();
 					}
 				}, 100);
-
 			}
 		}
 		if (action == "Save") {

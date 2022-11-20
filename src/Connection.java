@@ -11,6 +11,7 @@ public class Connection {
 	private ConnectionDecisionHandlerInterface inheritanceHandler;
 	private ConnectionDecisionHandlerInterface compositionHandler;
 	private String globalConnectionType = "ASSOCIATION"; //default value
+	private ClassInfo draggingClass;
 	
 	Connection(JPanel panel) {
 		this.panel = panel;
@@ -48,27 +49,44 @@ public class Connection {
 		this.globalConnectionType = connectionType;
 	}
 	
-	public boolean checkIfExist(int x, int y) {
+	private boolean populateSelectedClasses(ClassInfo classInfo) {
+		if(selectedClasses.contains(classInfo)) {
+			return true;
+		}
+		if(selectedClasses.size() == 1) {
+			selectedClasses.add(classInfo);
+			this.connectClasses(
+					selectedClasses.get(0), 
+					selectedClasses.get(1),
+					globalConnectionType);
+			this.clearSelection();
+			return true;
+		}
+		selectedClasses.add(classInfo);
+		return true;
+	}
+	
+	public boolean checkIfExist(int x, int y, boolean dragAndDrop) {
 		List<ClassInfo> classInfoList = ClassData.getInstance().getClassList();
 		for (ClassInfo classInfo : classInfoList) {
 			if (x >= classInfo.getX()-Config.BOX_WIDTH/2 && x <= classInfo.getX()+Config.BOX_WIDTH/2 && y >= classInfo.getY()-Config.BOX_HEIGHT/2 && y <= classInfo.getY()+Config.BOX_HEIGHT/2) {
-				if(selectedClasses.contains(classInfo)) {
+				if(!dragAndDrop) {
+					return this.populateSelectedClasses(classInfo);
+				} else {
+					this.setDraggingClassInfo(classInfo);
 					return true;
 				}
-				if(selectedClasses.size() == 1) {
-					selectedClasses.add(classInfo);
-					this.connectClasses(
-							selectedClasses.get(0), 
-							selectedClasses.get(1),
-							globalConnectionType);
-					this.clearSelection();
-					return true;
-				}
-				selectedClasses.add(classInfo);
-				return true;
 			}
 		}
 		return false;
+	}
+	
+	private void setDraggingClassInfo(ClassInfo classInfo) {
+		draggingClass = classInfo;
+	}
+	
+	public ClassInfo getDraggingClassInfo() {
+		return draggingClass;
 	}
 	
 	public void clearSelection() {
