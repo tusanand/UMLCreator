@@ -20,6 +20,7 @@ public class ButtonActions extends JFrame implements ActionListener {
 	protected JMenuBar menuBar;
 	protected JMenu fileMenu;
 	protected JMenuItem saveMenuItem;
+	protected JMenuItem newMenuItem;
 	protected JMenuItem loadMenuItem;
 	protected JMenuItem connectionSetterMenuItem;
 	protected JMenu helpMenu;
@@ -36,13 +37,16 @@ public class ButtonActions extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.connectionSetterMenuItem) {
-			JOptionPane.showMessageDialog(this, chooseConnectionType, "Connection Type", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, chooseConnectionType, "Connection Type",
+					JOptionPane.INFORMATION_MESSAGE);
 		} else if (e.getSource() == this.associationBtn) {
 			umlDesigner.getConnection().setGlobalConnectionType("ASSOCIATION");
 		} else if (e.getSource() == this.inheritanceBtn) {
 			umlDesigner.getConnection().setGlobalConnectionType("INHERITANCE");
 		} else if (e.getSource() == this.compositionBtn) {
 			umlDesigner.getConnection().setGlobalConnectionType("COMPOSITION");
+		} else if (e.getSource() == this.newMenuItem) {
+			// Clear Screen
 		} else if (e.getSource() == this.saveMenuItem) {
 			fileHandler.selectSaveFile("Save");
 		} else if (e.getSource() == this.loadMenuItem) {

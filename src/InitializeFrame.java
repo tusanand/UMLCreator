@@ -26,7 +26,7 @@ public class InitializeFrame extends ButtonActions {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
 
-		//TODO: Add vertical scroll
+		// TODO: Add vertical scroll
 		UmlDescriptor umlDescriptor = new UmlDescriptor();
 		umlDescriptor.setBackground(Color.white);
 		umlDescriptor.setBounds(Config.PADDING, Config.PADDING, Config.DESCRIPTOR_WIDTH,
@@ -41,7 +41,7 @@ public class InitializeFrame extends ButtonActions {
 				Config.UML_DESCRIPTOR_HEIGHT);
 		umlDesigner.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.getContentPane().add(umlDesigner);
-		
+
 		fileHandler = new FileHandler(umlDesigner);
 		fileHandler.addObserver(umlDesigner);
 
@@ -50,6 +50,10 @@ public class InitializeFrame extends ButtonActions {
 		fileMenu = new JMenu("File");
 		fileMenu.setMnemonic(KeyEvent.VK_F);
 		menuBar.add(fileMenu);
+
+		newMenuItem = new JMenuItem("New", KeyEvent.VK_N);
+		newMenuItem.addActionListener(this);
+		fileMenu.add(newMenuItem);
 
 		saveMenuItem = new JMenuItem("Save As", KeyEvent.VK_S);
 		saveMenuItem.addActionListener(this);
@@ -66,7 +70,7 @@ public class InitializeFrame extends ButtonActions {
 		helpMenu = new JMenu("Help");
 		helpMenu.setMnemonic(KeyEvent.VK_H);
 		menuBar.add(helpMenu);
-		
+
 		about = new JMenuItem("About", KeyEvent.VK_A);
 		about.addActionListener(this);
 		helpMenu.add(about);
@@ -103,7 +107,7 @@ public class InitializeFrame extends ButtonActions {
 		associationBtn.addActionListener(this);
 		inheritanceBtn.addActionListener(this);
 		compositionBtn.addActionListener(this);
-		
+
 		teamInfoPanel = new JPanel();
 		String info = "Tushar Anand - 1219436270 <br/>"
 				+ "Vaibhav Somani - ASU ID <br/>"
@@ -112,14 +116,13 @@ public class InitializeFrame extends ButtonActions {
 				+ "Amber - ASU ID <br/>";
 		JLabel teamInfo = new JLabel("<html>" + info + "</html>");
 		teamInfoPanel.add(teamInfo);
-		
 
 		JPanel loggerPanel = new JPanel();
 		loggerPanel.setBackground(Color.white);
 		loggerPanel.setBounds(
-				Config.PADDING, 
-				2 * Config.PADDING + Config.UML_DESCRIPTOR_HEIGHT, 
-				Config.WINDOW_WIDTH - 3 * Config.PADDING, 
+				Config.PADDING,
+				2 * Config.PADDING + Config.UML_DESCRIPTOR_HEIGHT,
+				Config.WINDOW_WIDTH - 3 * Config.PADDING,
 				Config.LOGGER_HEIGHT);
 		loggerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		StatusLogger.getInstance().setPanel(loggerPanel);
