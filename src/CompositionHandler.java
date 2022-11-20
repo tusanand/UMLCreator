@@ -15,11 +15,8 @@ public class CompositionHandler implements ConnectionDecisionHandlerInterface {
 	public void handleRequest(String connectionType, ClassInfo parentClass, ClassInfo childClass, JPanel panel) {
 		if (connectionType.equals("COMPOSITION")) {
 			ConnectClassInterface line = new DrawLine(panel);
-			// LineDecorator associate = new DrawAssociation(panel);
 			LineDecorator compose = new DrawComposition(panel);
 			compose.decorate(line);
-			// associate.decorate(line);
-			// compose.decorate(associate);
 			compose.draw(parentClass.getX(), parentClass.getY(), childClass.getX(), childClass.getY());
 			ClassData.getInstance().addConnectionType(parentClass, childClass, connectionType);
 			StatusLogger.getInstance().showMessage("Connected classes using composition");
