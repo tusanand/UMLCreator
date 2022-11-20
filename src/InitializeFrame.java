@@ -110,10 +110,10 @@ public class InitializeFrame extends ButtonActions {
 
 		teamInfoPanel = new JPanel();
 		String info = "Tushar Anand - 1219436270 <br/>"
+				+ "Madhavan Raja - 1225412344 <br/>"
 				+ "Vaibhav Somani - ASU ID <br/>"
-				+ "Madhavan Raja - ASU ID <br/>"
-				+ "Kyle - ASU ID <br/>"
-				+ "Amber - ASU ID <br/>";
+				+ "Kyle Atkinson - ASU ID <br/>"
+				+ "Amber Luu - ASU ID <br/>";
 		JLabel teamInfo = new JLabel("<html>" + info + "</html>");
 		teamInfoPanel.add(teamInfo);
 

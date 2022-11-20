@@ -21,6 +21,10 @@ public final class Config {
 
     public static int BOX_TEXT_OFFSET = 5;
 
+    public static int ASSOCIATION_ARROW_SIZE = 10;
+    public static int COMPOSITION_DIAMOND_WIDTH = 16;
+    public static int COMPOSITION_DIAMOND_HEIGHT = 10;
+
     public static int BUTTON_HEIGHT = 80;
 
     public static int BTN_RUN_WIDTH = 180;
