@@ -1,6 +1,7 @@
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -11,9 +12,11 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class UmlDesigner extends JPanel implements MouseListener, Observer, MouseMotionListener {
 	private Connection connection;
+	private boolean isDragged = false;
 	
 	public UmlDesigner() {
 		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
 		connection = new Connection(this);
 	}
 	
@@ -44,20 +47,24 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 		for(ClassInfo classInfo: classInfoList) {
 			this.storeandDrawClassInfo(classInfo.getX(), classInfo.getY(), classInfo.getName(), classInfo.getId());
 		}
-		StatusLogger.getInstance().showMessage("File data drawn on the screen");
+		StatusLogger.getInstance().showMessage("Classes updated on screen");
 	}
 	
-//	private void updateClassList(ClassInfo updatedClass) {
-//		for(ClassInfo classInfo: ClassData.getInstance().getClassList()) {
-//			if(classInfo.getId() == updatedClass.getId()) {
-//				classInfo.setX(updatedClass.getX());
-//				classInfo.setY(updatedClass.getY());
-//			}
-//		}
-//		ClassData.getInstance().clearData();
-//		this.drawUml(ClassData.getInstance().getClassList());
-//		this.connection.connectClasses(ClassData.getInstance().getClassList());
-//	}
+	private void updateClassList(ClassInfo updatedClass) {
+		//TODO: these lines are preventing the redraw
+//		this.removeAll();
+//		this.updateUI();
+		for(ClassInfo classInfo: ClassData.getInstance().getClassList()) {
+			if(classInfo.getId() == updatedClass.getId()) {
+				classInfo.setX(updatedClass.getX());
+				classInfo.setY(updatedClass.getY());
+			}
+		}
+		List<ClassInfo> classInfoList = new ArrayList<ClassInfo>(ClassData.getInstance().getClassList());
+		ClassData.getInstance().clearData();
+		this.drawUml(classInfoList);
+		this.connection.connectClasses(ClassData.getInstance().getClassList());
+	}
  	
 	public Connection getConnection() {
 		return this.connection;
@@ -65,10 +72,6 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
 		if(connection.checkIfExist(x, y, false)) {
@@ -83,12 +86,19 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 	}
 
 	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-//		ClassInfo classInfo = connection.getDraggingClassInfo();
-//		classInfo.setX(e.getX());
-//		classInfo.setY(e.getY());
-//		this.updateClassList(classInfo);
+		if(!isDragged) {
+			return;
+		}
+		isDragged = false;
+		ClassInfo classInfo = connection.getDraggingClassInfo();
+		classInfo.setX(e.getX());
+		classInfo.setY(e.getY());
+		this.updateClassList(classInfo);
 	}
 
 	@Override
@@ -105,8 +115,10 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		//connection.checkIfExist(e.getX(), e.getY(), true);
+		if(!isDragged && !connection.checkIfExist(e.getX(), e.getY(), true)) {
+			return;
+		}
+		isDragged = true;
 	}
 
 	@Override
