@@ -78,11 +78,7 @@ public class DrawInheritance extends LineDecorator {
 
 		g.setColor(Color.WHITE);
 		g.fillPolygon(p);
-
 		g.setColor(Color.BLACK);
-
-		g.drawLine(arrowStartX, arrowStartY, arrow1EndX, arrow1EndY);
-		g.drawLine(arrowStartX, arrowStartY, arrow2EndX, arrow2EndY);
-		g.drawLine(arrow1EndX, arrow1EndY, arrow2EndX, arrow2EndY);
+		g.drawPolygon(p);
 	}
 }
