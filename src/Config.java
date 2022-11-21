@@ -43,4 +43,10 @@ public final class Config {
     public static int TEXT_AREA_COLS = 25;
 
     public static int WINDOW_HEIGHT = 7 * PADDING + UML_DESCRIPTOR_HEIGHT + LOGGER_HEIGHT;
+    
+    public static String TEAM_INFO = "Tushar Anand - 1219436270 <br/>"
+			+ "Madhavan Raja - 1225412344 <br/>"
+			+ "Vaibhav Somani - 1224094001 <br/>"
+			+ "Kyle Atkinson - 1214434715 <br/>"
+			+ "Amber Luu - 1212776355 <br/>";
 }

@@ -108,12 +108,7 @@ public class InitializeFrame extends ButtonActions {
 		compositionBtn.addActionListener(this);
 
 		teamInfoPanel = new JPanel();
-		String info = "Tushar Anand - 1219436270 <br/>"
-				+ "Madhavan Raja - 1225412344 <br/>"
-				+ "Vaibhav Somani - 1224094001 <br/>"
-				+ "Kyle Atkinson - 1214434715 <br/>"
-				+ "Amber Luu - ASU ID <br/>";
-		JLabel teamInfo = new JLabel("<html>" + info + "</html>");
+		JLabel teamInfo = new JLabel("<html>" + Config.TEAM_INFO + "</html>");
 		teamInfoPanel.add(teamInfo);
 
 		JPanel loggerPanel = new JPanel();
