@@ -79,7 +79,6 @@ public class UmlDescriptor extends JPanel implements Observer {
 	
 	private void showClassDescription(String message) {
 		textArea.setText(message);
-		StatusLogger.getInstance().showMessage("Class Added");
 	}
 
 }

@@ -47,6 +47,7 @@ public class Connection {
 	
 	public void setGlobalConnectionType(String connectionType) {
 		this.globalConnectionType = connectionType;
+		StatusLogger.getInstance().showMessage("Changed connection type to " + connectionType);
 	}
 	
 	private boolean populateSelectedClasses(ClassInfo classInfo) {
@@ -62,6 +63,7 @@ public class Connection {
 			this.clearSelection();
 			return true;
 		}
+		StatusLogger.getInstance().showMessage("Parent class selected");
 		selectedClasses.add(classInfo);
 		return true;
 	}

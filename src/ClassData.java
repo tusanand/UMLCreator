@@ -32,6 +32,7 @@ public class ClassData extends Observable {
 		idGenerator++;
 		this.classInfoList.add(classInfo);
 		this.notifyListeners();
+		StatusLogger.getInstance().showMessage("New class created");
 	}
 	
 	public List<ClassInfo> getClassList() {
@@ -47,6 +48,7 @@ public class ClassData extends Observable {
 		idGenerator = 1;
 		classInfoList.clear();
 		this.notifyListeners();
+		StatusLogger.getInstance().showMessage("Data cleared");
 	}
 
 }

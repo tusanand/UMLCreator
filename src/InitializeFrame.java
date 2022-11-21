@@ -128,5 +128,7 @@ public class InitializeFrame extends ButtonActions {
 		this.getContentPane().add(loggerPanel);
 
 		ClassData.getInstance().addObserver(umlDescriptor);
+		
+		StatusLogger.getInstance().showMessage("Application Loaded");
 	}
 }
