@@ -2,7 +2,7 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 
 public class DrawAssociation extends LineDecorator {
-	Graphics g;
+	private Graphics g;
 	private int lineStartX;
 	private int lineStartY;
 	private int lineEndX;
