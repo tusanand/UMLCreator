@@ -53,9 +53,9 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 	
 	private void updateClassList(ClassInfo updatedClass) {
 		//TODO: these lines are preventing the redraw
-		this.removeAll();
-		this.revalidate();
-		this.repaint();
+//		this.removeAll();
+//		this.revalidate();
+//		this.repaint();
 		for(ClassInfo classInfo: ClassData.getInstance().getClassList()) {
 			if(classInfo.getId() == updatedClass.getId()) {
 				classInfo.setX(updatedClass.getX());
