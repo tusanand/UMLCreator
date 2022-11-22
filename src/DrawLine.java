@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 public class DrawLine implements ConnectClassInterface {
 	private Graphics g;
 
-	DrawLine(JPanel panel) {
+	public DrawLine(JPanel panel) {
 		g = panel.getGraphics();
 	}
 

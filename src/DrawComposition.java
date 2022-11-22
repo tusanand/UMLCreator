@@ -16,7 +16,7 @@ public class DrawComposition extends LineDecorator {
 	private int diamondEndX;
 	private int diamondEndY;
 
-	DrawComposition(JPanel panel) {
+	public DrawComposition(JPanel panel) {
 		g = panel.getGraphics();
 	}
 

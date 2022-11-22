@@ -6,7 +6,7 @@ public interface ConnectionDecisionHandlerInterface {
 
 	public void setSuccessor(ConnectionDecisionHandlerInterface successor);
 	
-	void handleRequest(String connectionType, ClassInfo parentClass, ClassInfo childClass, JPanel panel);
+	public void handleRequest(String connectionType, ClassInfo parentClass, ClassInfo childClass, JPanel panel);
 
 	public List<String> handleRequest(String className,String connectionType, List<String> displayMessage);
 }

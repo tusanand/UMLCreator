@@ -17,7 +17,7 @@ public class UmlDescriptor extends JPanel implements Observer {
 	private List<ClassInfo> classList;
 	private JTextArea textArea;
 	
-	UmlDescriptor() {
+	public UmlDescriptor() {
 		associationHandler = new AssociationHandler();
 		inheritanceHandler = new InheritanceHandler();
 		compositionHandler = new CompositionHandler();

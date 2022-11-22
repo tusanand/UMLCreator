@@ -13,7 +13,7 @@ public class Connection {
 	private String globalConnectionType = "ASSOCIATION"; //default value
 	private ClassInfo draggingClass;
 	
-	Connection(JPanel panel) {
+	public Connection(JPanel panel) {
 		this.panel = panel;
 		selectedClasses = new ArrayList<ClassInfo>();
 		associationHandler = new AssociationHandler();

@@ -7,7 +7,7 @@ public class Rectangle implements DrawRectangleInterface {
 
 	private Graphics g;
 
-	Rectangle(JPanel panel) {
+	public Rectangle(JPanel panel) {
 		g = panel.getGraphics();
 	}
 

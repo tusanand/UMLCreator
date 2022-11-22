@@ -10,7 +10,7 @@ public class DrawInheritance extends LineDecorator {
 	private int lineEndX;
 	private int lineEndY;
 
-	DrawInheritance(JPanel panel) {
+	public DrawInheritance(JPanel panel) {
 		g = panel.getGraphics();
 	}
 

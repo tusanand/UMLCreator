@@ -8,7 +8,7 @@ public class DrawAssociation extends LineDecorator {
 	private int lineEndX;
 	private int lineEndY;
 
-	DrawAssociation(JPanel panel) {
+	public DrawAssociation(JPanel panel) {
 		g = panel.getGraphics();
 	}
 
