@@ -6,7 +6,7 @@ import java.util.Observable;
 public class ClassData extends Observable {
 	private static ClassData classData;
 	private List<ClassInfo> classInfoList;
-	int idGenerator;
+	private int idGenerator;
 	
 	private ClassData() {
 		classInfoList = new ArrayList<ClassInfo>();
