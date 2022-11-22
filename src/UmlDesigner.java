@@ -37,7 +37,8 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 	@Override
 	public void update(Observable o, Object arg) {
 		this.removeAll();
-		this.updateUI();
+		this.revalidate();
+		this.repaint();
 		List<ClassInfo> classInfoList = (List<ClassInfo>) arg;
 		this.drawUml(classInfoList);
 		this.connection.connectClasses(classInfoList);
@@ -52,8 +53,9 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 	
 	private void updateClassList(ClassInfo updatedClass) {
 		//TODO: these lines are preventing the redraw
-//		this.removeAll();
-//		this.updateUI();
+		this.removeAll();
+		this.revalidate();
+		this.repaint();
 		for(ClassInfo classInfo: ClassData.getInstance().getClassList()) {
 			if(classInfo.getId() == updatedClass.getId()) {
 				classInfo.setX(updatedClass.getX());
@@ -63,11 +65,11 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 		List<ClassInfo> classInfoList = new ArrayList<ClassInfo>(ClassData.getInstance().getClassList());
 		ClassData.getInstance().clearData();
 		this.drawUml(classInfoList);
-		this.connection.connectClasses(ClassData.getInstance().getClassList());
+		this.connection.connectClasses(classInfoList);
 	}
  	
 	public Connection getConnection() {
-		return this.connection;
+		return connection;
 	}
 
 	@Override

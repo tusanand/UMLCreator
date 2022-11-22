@@ -34,6 +34,8 @@ public class ButtonActions extends JFrame implements ActionListener {
 	
 	private void clearScreen() {
 		ClassData.getInstance().clearData();
+		umlDesigner.removeAll();
+		umlDesigner.revalidate();
 		umlDesigner.repaint();
 	}
 
