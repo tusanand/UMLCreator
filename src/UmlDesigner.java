@@ -60,6 +60,7 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 			if(classInfo.getId() == updatedClass.getId()) {
 				classInfo.setX(updatedClass.getX());
 				classInfo.setY(updatedClass.getY());
+				break;
 			}
 		}
 		List<ClassInfo> classInfoList = new ArrayList<ClassInfo>(ClassData.getInstance().getClassList());
