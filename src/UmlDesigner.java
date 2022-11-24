@@ -39,9 +39,7 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable o, Object arg) {
-		this.removeAll();
-		this.revalidate();
-		this.repaint();
+		this.clearScreen();
 		List<ClassInfo> classInfoList = (List<ClassInfo>) arg;
 		this.drawUml(classInfoList);
 		this.connection.connectClasses(classInfoList);
@@ -60,12 +58,11 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 		graphics.fillRect(0, 0, Config.UML_WIDTH, Config.UML_DESCRIPTOR_HEIGHT);
 
 		graphics.setColor(Color.BLACK);
-		graphics.drawRect(0, 0, Config.UML_WIDTH, Config.UML_DESCRIPTOR_HEIGHT);
+		graphics.drawRect(0, 0, Config.UML_WIDTH-2, Config.UML_DESCRIPTOR_HEIGHT-2);
 	}
 
 	private void updateClassList(ClassInfo updatedClass) {
-		clearScreen();
-
+		this.clearScreen();
 		for (ClassInfo classInfo : ClassData.getInstance().getClassList()) {
 			if (classInfo.getId() == updatedClass.getId()) {
 				classInfo.setX(updatedClass.getX());
@@ -108,11 +105,6 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 			return;
 		}
 		isDragged = false;
-		clearScreen();
-		ClassInfo classInfo = connection.getDraggingClassInfo();
-		classInfo.setX(e.getX());
-		classInfo.setY(e.getY());
-		this.updateClassList(classInfo);
 	}
 
 	@Override
@@ -133,6 +125,10 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 			return;
 		}
 		isDragged = true;
+		ClassInfo classInfo = connection.getDraggingClassInfo();
+		classInfo.setX(e.getX());
+		classInfo.setY(e.getY());
+		this.updateClassList(classInfo);
 	}
 
 	@Override

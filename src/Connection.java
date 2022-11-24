@@ -36,7 +36,7 @@ public class Connection {
 			Map<Integer, String> parentClassConnections = parentClass.getConnections();
 			for(Integer key: parentClassConnections.keySet()) {
 				for(ClassInfo childClass: ClassData.getInstance().getClassList()) {
-					if(childClass.getId() == key) {
+					if(childClass.getId() == key && parentClass.getId() != childClass.getId()) {
 						this.connectClasses(ClassData.getInstance().getClassList().get(classInfoList.indexOf(parentClass)), childClass, parentClassConnections.get(key));
 						break;
 					}
@@ -75,6 +75,7 @@ public class Connection {
 				if(!dragAndDrop) {
 					return this.populateSelectedClasses(classInfo);
 				} else {
+					this.clearSelection();
 					this.setDraggingClassInfo(classInfo);
 					return true;
 				}
