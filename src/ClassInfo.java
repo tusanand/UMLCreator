@@ -1,6 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class creates a data structure to save class and connection information.
+ */
 public class ClassInfo {
 	private Integer id;
 	private int x;

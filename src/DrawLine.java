@@ -2,6 +2,9 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+/**
+ * This class draws a line.
+ */
 public class DrawLine implements ConnectClassInterface {
 	private Graphics g;
 

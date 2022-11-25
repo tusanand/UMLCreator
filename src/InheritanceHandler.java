@@ -2,6 +2,9 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+/**
+ * This class handles the resposibility of Composition connection between the classes.
+ */
 public class InheritanceHandler implements ConnectionDecisionHandlerInterface {
 
 	private ConnectionDecisionHandlerInterface successor;
@@ -11,6 +14,10 @@ public class InheritanceHandler implements ConnectionDecisionHandlerInterface {
 		this.successor = successor;
 	}
 
+	/**
+	 * This method checks the connection types and handle the request,
+	 * or passes the request to the next handler.
+	 */
 	@Override
 	public void handleRequest(String connectionType, ClassInfo parentClass, ClassInfo childClass, JPanel panel) {
 		if (connectionType.equals("INHERITANCE")) {

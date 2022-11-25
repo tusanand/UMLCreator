@@ -3,6 +3,9 @@ import javax.swing.JPanel;
 import java.awt.Polygon;
 import java.awt.Color;
 
+/**
+ * This class Decorates the line with Inheritance arrowhead.
+ */
 public class DrawInheritance extends LineDecorator {
 	private Graphics g;
 	private int lineStartX;

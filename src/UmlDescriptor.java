@@ -9,6 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+/**
+ * This class creates the description of classes in our view.
+ */
 @SuppressWarnings({ "serial", "deprecation" })
 public class UmlDescriptor extends JPanel implements Observer {
 	private ConnectionDecisionHandlerInterface associationHandler;
@@ -46,6 +49,9 @@ public class UmlDescriptor extends JPanel implements Observer {
 		this.showClassDescription(displayMessage);
 	}
 	
+	/**
+	 * This method adds different types of connection a class has to the discription.
+	 */
 	public String addDependencies(ClassInfo classInfo) {
 		List<String> connectedClasses = new ArrayList<String>();
 		connectedClasses.add(""); //association classes
@@ -62,6 +68,9 @@ public class UmlDescriptor extends JPanel implements Observer {
 		return formDisplayMessage(connectedClasses);
 	}
 	
+	/**
+	 * This methods creates the display message.
+	 */
 	private String formDisplayMessage(List<String> connectedClasses) {
 		String message = "";
 		if(connectedClasses.get(1).length() > 0) {

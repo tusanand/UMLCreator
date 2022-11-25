@@ -2,6 +2,10 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+
+/**
+ * This class handles the resposibility of Association connection between the classes.
+ */
 public class AssociationHandler implements ConnectionDecisionHandlerInterface {
 
 	private ConnectionDecisionHandlerInterface successor;
@@ -11,6 +15,10 @@ public class AssociationHandler implements ConnectionDecisionHandlerInterface {
 		this.successor = successor;
 	}
 
+	/**
+	 * This method checks the connection types and handle the request,
+	 * or passes the request to the next handler.
+	 */
 	@Override
 	public void handleRequest(String connectionType, ClassInfo parentClass, ClassInfo childClass, JPanel panel) {
 		if (connectionType.equals("ASSOCIATION")) {

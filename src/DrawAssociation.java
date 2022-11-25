@@ -1,6 +1,9 @@
 import javax.swing.JPanel;
 import java.awt.Graphics;
 
+/**
+ * This class Decorates the line with Association arrowhead.
+ */
 public class DrawAssociation extends LineDecorator {
 	private Graphics g;
 	private int lineStartX;

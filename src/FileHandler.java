@@ -12,6 +12,10 @@ import java.util.Timer;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * This class handles file data.
+ *
+ */
 public class FileHandler extends Observable {
 	private UmlDesigner umlDesigner;
 	
@@ -19,6 +23,10 @@ public class FileHandler extends Observable {
 		this.umlDesigner = umlDesigner;
 	}
 	
+	/**
+	 * This methods saves data to file.
+	 *@param filePath
+	 */
 	private void saveToFile(String filePath) {
 		try {
 			FileWriter writer = new FileWriter(filePath); 
@@ -60,6 +68,10 @@ public class FileHandler extends Observable {
 		}
 	}
 	
+	/**
+	 * This methods parses the data from file.
+	 *
+	 */
 	private void parseFileData(List<String> lines) {
 		List<ClassInfo> classInfoList = new ArrayList<ClassInfo>();
 		for(String line: lines) {

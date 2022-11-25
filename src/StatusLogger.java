@@ -1,6 +1,9 @@
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * This class informs user of the status of the application.
+ */
 public class StatusLogger {
 	private static StatusLogger statusLogger;
 	private JPanel panel;

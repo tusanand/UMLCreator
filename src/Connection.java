@@ -4,6 +4,9 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
+/**
+ * This Class creates connections between diagram classes.
+ */
 public class Connection {
 	private List<ClassInfo> selectedClasses;
 	private JPanel panel;
@@ -23,6 +26,9 @@ public class Connection {
 		inheritanceHandler.setSuccessor(compositionHandler);
 	}
 	
+	/**
+	 * This method uses chain of responsibities to handle the type of connection.
+	 */
 	private void connectClasses(ClassInfo parentClass, ClassInfo childClass, String connectionType) {
 		associationHandler.handleRequest(
 				connectionType, 
@@ -50,6 +56,9 @@ public class Connection {
 		StatusLogger.getInstance().showMessage("Changed connection type to " + connectionType);
 	}
 	
+	/**
+	 * TODO
+	 */
 	private boolean populateSelectedClasses(ClassInfo classInfo) {
 		if(selectedClasses.contains(classInfo)) {
 			return true;
@@ -68,6 +77,9 @@ public class Connection {
 		return true;
 	}
 	
+	/**
+	 * This method checks if the area clicked already contains a class.
+	 */
 	public boolean checkIfExist(int x, int y, boolean dragAndDrop) {
 		List<ClassInfo> classInfoList = ClassData.getInstance().getClassList();
 		for (ClassInfo classInfo : classInfoList) {

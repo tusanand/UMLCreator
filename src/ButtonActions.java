@@ -9,6 +9,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+/**
+ * This class invokes all the button actions
+ *
+ */
 @SuppressWarnings("serial")
 public class ButtonActions extends JFrame implements ActionListener {
 	protected JPanel chooseConnectionType;
@@ -32,6 +36,9 @@ public class ButtonActions extends JFrame implements ActionListener {
 	public ButtonActions() {
 	}
 	
+	/**
+	 * This method clears the data
+	 */
 	private void clearScreen() {
 		ClassData.getInstance().clearData();
 		umlDesigner.removeAll();

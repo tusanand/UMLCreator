@@ -1,4 +1,6 @@
-
+/**
+ * This is and abstract class for handling decoration of the line.
+ */
 public abstract class LineDecorator implements ConnectClassInterface {
 	private ConnectClassInterface connectClassInterface;
 	

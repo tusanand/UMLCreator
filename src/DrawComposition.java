@@ -3,6 +3,9 @@ import java.awt.Polygon;
 import java.awt.Color;
 import javax.swing.JPanel;
 
+/**
+ * This class Decorates the line with Composition arrowhead.
+ */
 public class DrawComposition extends LineDecorator {
 	private Graphics g;
 
