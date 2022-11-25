@@ -48,7 +48,7 @@ public class InitializeFrame extends ButtonActions {
 		umlDesigner.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.getContentPane().add(umlDesigner);
 
-		fileHandler = new FileHandler(umlDesigner);
+		fileHandler = new FileHandler();
 		fileHandler.addObserver(umlDesigner);
 
 		menuBar = new JMenuBar();

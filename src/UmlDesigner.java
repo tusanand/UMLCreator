@@ -30,7 +30,7 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 	 * This method stores the information of the class.
 	 */
 	private void storeandDrawClassInfo(int x, int y, String name, Integer... id) {
-		Rectangle rect = new Rectangle(this);
+		DrawRectangleInterface rect = new Rectangle(this);
 		rect.draw(x, y, name);
 		ClassInfo classInfo = new ClassInfo();
 		classInfo.setX(x);

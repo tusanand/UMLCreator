@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 
 /**
- * This class handles the resposibility of Association connection between the classes.
+ * This class handles the responsibility of Association connection between the classes.
  */
 public class AssociationHandler implements ConnectionDecisionHandlerInterface {
 
@@ -33,6 +33,9 @@ public class AssociationHandler implements ConnectionDecisionHandlerInterface {
 		}
 	}
 
+	/**
+	 * this method is to create string to display class name on the descriptor panel
+	 */
 	@Override
 	public List<String> handleRequest(String className, String connectionType, List<String> message) {
 		String msg = message.get(0);

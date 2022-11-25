@@ -17,10 +17,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  */
 public class FileHandler extends Observable {
-	private UmlDesigner umlDesigner;
 	
-	public FileHandler(UmlDesigner umlDesigner) {
-		this.umlDesigner = umlDesigner;
+	public FileHandler() {
 	}
 	
 	/**

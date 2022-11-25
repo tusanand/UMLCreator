@@ -19,6 +19,7 @@ public class UmlDescriptor extends JPanel implements Observer {
 	private ConnectionDecisionHandlerInterface compositionHandler;
 	private List<ClassInfo> classList;
 	private JTextArea textArea;
+	private JScrollPane scroll;
 	
 	public UmlDescriptor() {
 		associationHandler = new AssociationHandler();
@@ -33,7 +34,7 @@ public class UmlDescriptor extends JPanel implements Observer {
 				Config.PADDING,
 				Config.PADDING));
 		textArea.setEditable(false);
-		JScrollPane scroll = new JScrollPane(textArea);
+		scroll = new JScrollPane(textArea);
 		this.add(scroll);
 	}
 
@@ -50,7 +51,7 @@ public class UmlDescriptor extends JPanel implements Observer {
 	}
 	
 	/**
-	 * This method adds different types of connection a class has to the discription.
+	 * This method adds different types of connection a class has to the description.
 	 */
 	public String addDependencies(ClassInfo classInfo) {
 		List<String> connectedClasses = new ArrayList<String>();
