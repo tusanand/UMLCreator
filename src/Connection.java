@@ -27,7 +27,7 @@ public class Connection {
 	}
 	
 	/**
-	 * This method uses chain of responsibities to handle the type of connection.
+	 * This method uses chain of responsibility to handle the type of connection.
 	 */
 	private void connectClasses(ClassInfo parentClass, ClassInfo childClass, String connectionType) {
 		associationHandler.handleRequest(
@@ -37,6 +37,10 @@ public class Connection {
 				panel);
 	}
 	
+	/**
+	 * selects parent and child classes for drawing after file loading/drag and drop
+	 * @param classInfoList
+	 */
 	public void connectClasses(List<ClassInfo> classInfoList) {
 		for(ClassInfo parentClass: classInfoList) {
 			Map<Integer, String> parentClassConnections = parentClass.getConnections();
@@ -51,13 +55,17 @@ public class Connection {
 		}
 	}
 	
+	/**
+	 * sets connection type globally
+	 * @param connectionType
+	 */
 	public void setGlobalConnectionType(String connectionType) {
 		this.globalConnectionType = connectionType;
 		StatusLogger.getInstance().showMessage("Changed connection type to " + connectionType);
 	}
 	
 	/**
-	 * TODO
+	 * selects parent and child classes
 	 */
 	private boolean populateSelectedClasses(ClassInfo classInfo) {
 		if(selectedClasses.contains(classInfo)) {
@@ -96,14 +104,25 @@ public class Connection {
 		return false;
 	}
 	
+	/**
+	 * sets class info that is being dragged
+	 * @param classInfo
+	 */
 	private void setDraggingClassInfo(ClassInfo classInfo) {
 		draggingClass = classInfo;
 	}
 	
+	/**
+	 * returns class info that is being dragged
+	 * @return
+	 */
 	public ClassInfo getDraggingClassInfo() {
 		return draggingClass;
 	}
 	
+	/**
+	 * clears the parent/child classes selected for connection
+	 */
 	public void clearSelection() {
 		selectedClasses.clear();
 	}

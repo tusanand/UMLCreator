@@ -35,16 +35,6 @@ public class ButtonActions extends JFrame implements ActionListener {
 
 	public ButtonActions() {
 	}
-	
-	/**
-	 * This method clears the data
-	 */
-	private void clearScreen() {
-		ClassData.getInstance().clearData();
-		umlDesigner.removeAll();
-		umlDesigner.revalidate();
-		umlDesigner.repaint();
-	}
 
 	/**
 	 * This method implements the button trigger.
@@ -55,13 +45,13 @@ public class ButtonActions extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(this, chooseConnectionType, "Connection Type",
 					JOptionPane.INFORMATION_MESSAGE);
 		} else if (e.getSource() == this.associationBtn) {
-			umlDesigner.getConnection().setGlobalConnectionType("ASSOCIATION");
+			umlDesigner.getConnectionInstance().setGlobalConnectionType("ASSOCIATION");
 		} else if (e.getSource() == this.inheritanceBtn) {
-			umlDesigner.getConnection().setGlobalConnectionType("INHERITANCE");
+			umlDesigner.getConnectionInstance().setGlobalConnectionType("INHERITANCE");
 		} else if (e.getSource() == this.compositionBtn) {
-			umlDesigner.getConnection().setGlobalConnectionType("COMPOSITION");
+			umlDesigner.getConnectionInstance().setGlobalConnectionType("COMPOSITION");
 		} else if (e.getSource() == this.newMenuItem) {
-			this.clearScreen();
+			umlDesigner.clearData();
 		} else if (e.getSource() == this.saveMenuItem) {
 			fileHandler.selectSaveFile("Save");
 		} else if (e.getSource() == this.loadMenuItem) {

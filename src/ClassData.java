@@ -55,6 +55,9 @@ public class ClassData extends Observable {
 		this.notifyListeners();
 	}
 	
+	/**
+	 * clears the data
+	 */
 	public void clearData() {
 		idGenerator = 1;
 		classInfoList.clear();

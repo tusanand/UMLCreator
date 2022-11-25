@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 
 /**
- * This class creats the diagram.
+ * This class creates the diagram.
  */
 @SuppressWarnings("serial")
 public class UmlDesigner extends JPanel implements MouseListener, Observer, MouseMotionListener {
@@ -61,7 +61,18 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 		}
 		StatusLogger.getInstance().showMessage("Classes updated on screen");
 	}
+	
+	/**
+	 * clears the stored data
+	 */
+	public void clearData() {
+		ClassData.getInstance().clearData();
+		this.clearScreen();
+	}
 
+	/**
+	 * clears the screen to redraw
+	 */
 	private void clearScreen() {
 		Graphics graphics = getGraphics();
 		graphics.setColor(Color.WHITE);
@@ -72,7 +83,7 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 	}
 
 	/**
-	 *  TODO
+	 *  updates class x and y coordinate that is being dragged
 	 */
 	private void updateClassList(ClassInfo updatedClass) {
 		this.clearScreen();
@@ -89,7 +100,7 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 		this.connection.connectClasses(classInfoList);
 	}
 
-	public Connection getConnection() {
+	public Connection getConnectionInstance() {
 		return connection;
 	}
 
