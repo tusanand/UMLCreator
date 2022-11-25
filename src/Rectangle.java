@@ -3,6 +3,9 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+/**
+ * This class creates the rectangle to represent classes.
+ */
 public class Rectangle implements DrawRectangleInterface {
 
 	private Graphics g;

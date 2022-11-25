@@ -1,3 +1,7 @@
+
+/**
+ * Configuration file.
+ */
 public final class Config {
     private Config() {
     }

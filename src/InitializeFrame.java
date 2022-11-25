@@ -11,6 +11,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+/**
+ * This class initializes the frame and all of its components
+ *
+ */
 @SuppressWarnings("serial")
 public class InitializeFrame extends ButtonActions {
 	public InitializeFrame() {
@@ -18,6 +22,9 @@ public class InitializeFrame extends ButtonActions {
 		this.setVisible(true);
 	}
 
+	/**
+	 * Initialize the contents of the frame.
+	 */
 	@SuppressWarnings("deprecation")
 	private void initialize() {
 		this.setTitle("UML DESIGNER");

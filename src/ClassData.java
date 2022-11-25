@@ -2,6 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+
+/**
+ * This class is a singleton storage for saving data.
+ *
+ */
 @SuppressWarnings("deprecation")
 public class ClassData extends Observable {
 	private static ClassData classData;
@@ -25,6 +30,9 @@ public class ClassData extends Observable {
 		return classData;
 	}
 	
+	/**
+	 * This method saves classes created into our data structure. 
+	 */
 	public void addClass(ClassInfo classInfo) {
 		if(classInfo.getId() == null) {
 			classInfo.setId(idGenerator);
@@ -39,6 +47,9 @@ public class ClassData extends Observable {
 		return classInfoList;
 	}
 	
+	/**
+	 * This method saves connections between classes into our data structure. 
+	 */
 	public void addConnectionType(ClassInfo parentClass, ClassInfo childClass, String connectionType) {
 		classInfoList.get(classInfoList.indexOf(parentClass)).setConnections(childClass.getId(), connectionType);
 		this.notifyListeners();

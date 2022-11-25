@@ -12,6 +12,9 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 
+/**
+ * This class creats the diagram.
+ */
 @SuppressWarnings("serial")
 public class UmlDesigner extends JPanel implements MouseListener, Observer, MouseMotionListener {
 	private Connection connection;
@@ -23,6 +26,9 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 		connection = new Connection(this);
 	}
 
+	/**
+	 * This method stores the information of the class.
+	 */
 	private void storeandDrawClassInfo(int x, int y, String name, Integer... id) {
 		Rectangle rect = new Rectangle(this);
 		rect.draw(x, y, name);
@@ -36,6 +42,7 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 		ClassData.getInstance().addClass(classInfo);
 	}
 
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable o, Object arg) {
@@ -45,6 +52,9 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 		this.connection.connectClasses(classInfoList);
 	}
 
+	/**
+	 * This method draws the class on the view
+	 */
 	private void drawUml(List<ClassInfo> classInfoList) {
 		for (ClassInfo classInfo : classInfoList) {
 			this.storeandDrawClassInfo(classInfo.getX(), classInfo.getY(), classInfo.getName(), classInfo.getId());
@@ -61,6 +71,9 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 		graphics.drawRect(0, 0, Config.UML_WIDTH-2, Config.UML_DESCRIPTOR_HEIGHT-2);
 	}
 
+	/**
+	 *  TODO
+	 */
 	private void updateClassList(ClassInfo updatedClass) {
 		this.clearScreen();
 		for (ClassInfo classInfo : ClassData.getInstance().getClassList()) {
@@ -119,6 +132,9 @@ public class UmlDesigner extends JPanel implements MouseListener, Observer, Mous
 
 	}
 
+	/**
+	 * This method implements the drag and drop functionality
+	 */
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (!isDragged && !connection.checkIfExist(e.getX(), e.getY(), true)) {
